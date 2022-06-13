@@ -28,13 +28,17 @@ public class ManagePatientRecords {
 	private manager.main_Menu menu = new manager.main_Menu();
 	private Scanner sc = new Scanner(System.in);
 	private ArrayList<String> list = new ArrayList<String>();
-
+	
 	// Method
 	public void EditPatient() {
 
 	}
 
-	public void AddNewPatient() {
+	public void AddNewPatient(ArrayList<Patient> patients) {
+
+		String lastD = patients.get(patients.size()-1).getD(); //<===
+		int lastE = patients.get(patients.size()-1).getE(); //<===
+
 		System.out.println("Add New Patient");
 		System.out.println("");
 		System.out.println("First Name: ");
@@ -60,6 +64,7 @@ public class ManagePatientRecords {
 
 		System.out.println("National ID no.: ");
 		NationalID = sc.nextLine();
+		
 
 		System.out.println("Save Patient Record[Y/N]? ");
 		transaction = sc.nextLine();
@@ -68,9 +73,10 @@ public class ManagePatientRecords {
 		do {
 			if (transaction.equals("Y") || transaction.equals("y")) {
 				// Save Patient Record
-				addPatient.GetUniqueIdentifier(NewPatientCount);
-
-				list.add(addPatient.GetUniqueIdentifier(NewPatientCount));
+				String newUID = addPatient.GetUniqueIdentifier(NewPatientCount, lastD, lastE);
+				System.out.println("new UID is " + newUID);
+				patients.add(new Patient(newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NationalID));
+				/*list.add(addPatient.GetUniqueIdentifier(NewPatientCount));
 				list.add(FirstName);
 				list.add(LastName);
 				list.add(MiddleName);
@@ -79,8 +85,9 @@ public class ManagePatientRecords {
 				list.add(Address);
 				list.add(Phone);
 				list.add(NationalID);
-
-				addPatient.SaveRecord(list);
+				System.out.println(list); //<=== */
+				addPatient.SaveRecord(patients.get(patients.size()-1));
+				
 				main_Menu.main(null);
 			} else if (transaction.equals("N") || transaction.equals("n")) {
 				System.out.println("Patient Record was not saved.");

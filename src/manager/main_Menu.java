@@ -1,8 +1,10 @@
 package manager;
+import records.Patient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class main_Menu {
 
@@ -12,7 +14,13 @@ public class main_Menu {
 
 	public static void main(String[] args) {
 		// Constructor
+		
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+
 		main_Menu menu = new main_Menu();
+
+		menu.readPatients(patients);
+		menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 
 		try (Scanner sc = new Scanner(System.in)) {
@@ -27,7 +35,7 @@ public class main_Menu {
 					switch (variable) {
 						case "1":
 							// Add
-							record.AddNewPatient();
+							record.AddNewPatient(patients);
 							break;
 						case "2":
 							// Edit
@@ -82,5 +90,45 @@ public class main_Menu {
 		System.out.println("[4] Search Patient Record");
 		System.out.println("[X] Return to Main Menu\n");
 		System.out.print("Select a transaction: ");
+	}
+
+	public void readPatients(ArrayList<Patient> patients){
+		String filepath = "Patients.txt";
+		boolean found;
+		String UID, LastName, FirstName, MiddleName,
+				Birthday, Gender, Address, Phone, NI;
+		
+		try {
+			Scanner x = new Scanner(new File(filepath));
+			x.useDelimiter(";");
+			System.out.println(x);
+
+			while (x.hasNext()) {
+				UID = x.next();
+				LastName = x.next();
+				FirstName = x.next();
+				MiddleName = x.next();
+				Birthday = x.next();
+				Gender = x.next();
+				Address = x.next();
+				Phone = x.next();
+				NI = x.next();
+				x.nextLine();
+				//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
+				
+				patients.add(new Patient(UID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NI));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void printPatients(ArrayList<Patient> patients){
+		System.out.println("Patients:");
+		for(int i=0; i<patients.size();i++){
+			System.out.println(patients.get(i).getUID());
+		}
 	}
 }

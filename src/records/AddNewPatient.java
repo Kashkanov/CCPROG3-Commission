@@ -18,8 +18,8 @@ public class AddNewPatient {
 	private ArrayList<String> list = new ArrayList<>();
 
 	// Methods
-	public void SaveRecord(ArrayList<String> list2) {
-		this.list.addAll(list2);
+	public void SaveRecord(Patient patient) {
+		//this.list.addAll(list2);
 		try {
 			// Creates a new Text file called Patients.txt
 			File myObj = new File("Patients.txt");
@@ -42,6 +42,7 @@ public class AddNewPatient {
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
 
+			/*
 			for (int i = 0; i < this.list.size(); i++) {
 				removeDuplicate(this.list);
 				pw.print(this.list.get(i) + ";");
@@ -50,7 +51,19 @@ public class AddNewPatient {
 					pw.println();
 					k = 0;
 				}
-			}
+			}*/
+
+			pw.print(patient.getUID() + ";");
+			pw.print(patient.getFirstName() + ";");
+			pw.print(patient.getlastName() + ";");
+			pw.print(patient.getMiddleName() + ";");
+			pw.print(patient.getBirthday() + ";");
+			pw.print(patient.getGender() + ";");
+			pw.print(patient.getAddress() + ";");
+			pw.print(patient.getNumber() + ";");
+			pw.print(patient.getNationalID() + ";");
+			pw.print("\n");
+			pw.flush();
 
 			System.out.println("Record Successfully Added.");
 			System.out.println("");
@@ -80,7 +93,7 @@ public class AddNewPatient {
 		this.list.addAll(temp);
 	}
 
-	public String GetUniqueIdentifier(int NewPatientCount) {
+	public String GetUniqueIdentifier(int NewPatientCount, String lastD, int lastE) {
 		// int newPatientCount = 101; //For TEST
 		String A;
 		String BBBB;
@@ -94,16 +107,16 @@ public class AddNewPatient {
 		LocalDateTime now = LocalDateTime.now();
 
 		// Check if UniqueIdentifier is in the text file or used
-		String filepath = "Patients.txt";
+		/*String filepath = "Patients.txt";
 		String checkUI = "P202206AAA00";
 
 		boolean found = false;
 		String OldUI, LastName, FirstName, MiddleName,
 				Birthday, Gender, Address, Phone, NI;
 
-		try {
+		/*try {
 			Scanner x = new Scanner(new File(filepath));
-			x.useDelimiter("[;]");
+			x.useDelimiter(";");
 			System.out.println(x);
 
 			while (x.hasNext() && !found) {
@@ -123,7 +136,7 @@ public class AddNewPatient {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		A = "P";
 		BBBB = yeardtf.format(now);
@@ -134,8 +147,30 @@ public class AddNewPatient {
 			month = CC;
 		}
 
+		DDD = lastD;
+
+		char d1 = lastD.charAt(0);
+		char d2 = lastD.charAt(1);
+		char d3 = lastD.charAt(2);
+
+		if(lastE == 99){
+			d3++;
+			if(d3 >= 'Z'){
+				d2++;
+				if(d2 >= 'Z'){
+					d1++;
+				}
+			}
+			EE = "01";
+		}
+		else {
+			EE = String.format("%02d", lastE+1);
+		}
+
+		DDD = ""+ d1 + d2 + d3;
+		
 		// if Added New Patient
-		int i = 0;
+		/*int i = 0;
 		outerloop: for (char c1 = 'A'; c1 <= 'Z'; c1++)
 			for (char c2 = 'A'; c2 <= 'Z'; c2++)
 				for (char c3 = 'A'; c3 <= 'Z'; c3++)
@@ -146,9 +181,10 @@ public class AddNewPatient {
 
 						if (i == NewPatientCount)
 							break outerloop;
-					}
+					}*/
 
 		UniqueIdentifier = A + BBBB + CC + DDD + EE;
+		System.out.println("unique= " + UniqueIdentifier);	//<===
 		return UniqueIdentifier;
 	}
 
