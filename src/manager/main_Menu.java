@@ -125,6 +125,7 @@ public class main_Menu {
 
 	}
 
+	//for testing
 	public void printPatients(ArrayList<Patient> patients){
 		System.out.println("Patients:");
 		for(int i=0; i<patients.size();i++){

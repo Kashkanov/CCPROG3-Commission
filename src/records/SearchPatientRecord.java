@@ -20,7 +20,9 @@ public class SearchPatientRecord {
 		while(sc.hasNext()) {
 			String record = sc.nextLine();
 			if(record.contains(search)) {
-				System.out.println(record);
+				//	System.out.println(record);
+				String[] res = record.split(";");
+				System.out.println(res[0] + "\t" + res[1] + "\t" + res[2] + "\t" + res[3] + "\t" + res[4] + "\t" + res[5] + "\t" + res[6] + "\t" + res[7] + "\t" + res[8]);
 			}
 			else if (matches.isEmpty()){
 				System.out.println("No Record found.");
@@ -50,7 +52,9 @@ public class SearchPatientRecord {
 		
 		for ( int i = 0; i < matches.size(); i++){
 			  if (matches.get(i).contains(patientUID)){
-				  System.out.println(matches.get(i));
+				  //System.out.println(matches.get(i));
+					String res = matches.get(i);
+					System.out.println(res.split(";"));
 			  }   
 			}
 		
