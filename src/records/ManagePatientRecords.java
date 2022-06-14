@@ -75,7 +75,8 @@ public class ManagePatientRecords {
 				// Save Patient Record
 				String newUID = addPatient.GetUniqueIdentifier(NewPatientCount, lastD, lastE);
 				System.out.println("new UID is " + newUID);
-				patients.add(new Patient(newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NationalID));
+				String fullString = "" + newUID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NationalID;
+				patients.add(new Patient(fullString, newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NationalID));
 				/*list.add(addPatient.GetUniqueIdentifier(NewPatientCount));
 				list.add(FirstName);
 				list.add(LastName);
@@ -97,7 +98,7 @@ public class ManagePatientRecords {
 				|| transaction.equals("n")));
 	}
 
-	public void SearchPatientRecord() throws FileNotFoundException {
+	public void SearchPatientRecord(ArrayList<Patient> patients) throws FileNotFoundException {
 		String UI;
 		String LN;
 		String FN;
@@ -119,7 +120,7 @@ public class ManagePatientRecords {
 				// If Unique Identifier
 				System.out.println("Input Unique Identifier: ");
 				UI = sc.nextLine();
-				search.SearchRecord(UI, this.list);
+				search.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
 
 				break;
 			case "2":
@@ -133,14 +134,15 @@ public class ManagePatientRecords {
 				System.out.println("Birthday(YYYYMMDD): ");
 				BD = sc.nextLine();
 
-				String combine = LN + ";" + FN + ";" + BD + ";";
-				search.SearchRecord(combine, this.list);
+				String combine = FN + ";" + LN + ";" + BD + ";";
+				
+				search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
 				break;
 			case "3":
 				// If National ID
 				System.out.println("National ID no.: ");
 				NID = sc.nextLine();
-				search.SearchRecord(NID, this.list);
+				search.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
 				break;
 			case "X":
 				menu.main(null);

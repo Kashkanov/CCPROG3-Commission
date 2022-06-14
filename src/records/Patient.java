@@ -1,6 +1,7 @@
 package records;
 
 public class Patient {
+    public String fullString;
     public String UID;
     public String lastName;
     public String firstName;
@@ -13,8 +14,9 @@ public class Patient {
     public int UIDE;
     public String UIDD;
 
-    public Patient(String UID, String lastName, String firstName, String middleName, long birthday, char gender, String address, 
+    public Patient(String fullString, String UID, String lastName, String firstName, String middleName, long birthday, char gender, String address, 
         String number, String nationalID){
+            this.fullString = fullString;
             this.UID = UID;
             this.lastName = lastName;
             this.firstName = firstName;
@@ -26,6 +28,10 @@ public class Patient {
             this.nationalID = nationalID;
             isolateE();
             isolateD();
+    }
+
+    public String getFullString(){
+        return this.fullString;
     }
 
     public String getUID(){

@@ -6,6 +6,7 @@ import manager.main_Menu;
 
 import java.io.*;
 
+//TODO: search again should return to search function
 
 public class SearchPatientRecord {
 	main_Menu menu = new main_Menu();
@@ -15,16 +16,29 @@ public class SearchPatientRecord {
 		String filepath = "Patients.txt";
 		Scanner sc = new Scanner(new File(filepath));
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Patient's UID" + "\t" + "Last Name" + "\t" + "First Name" + "\t" + "Middle Name" + "\t" + "Birthday" + "\t" + "Gender" + "\t" + "Address" + "\t" + "Phone Number" + "\t" + "National ID no.");
+		System.out.println("Patient's UID" + "\t\t" + "Last Name" + "\t\t" + "First Name" + "\t\t" + "Middle Name" + "\t\t" + "Birthday" + "\t\t" + "Gender" + "\t\t" + "Address" + "\t\t" + "Phone Number" + "\t\t" + "National ID no.");
 		
-		while(sc.hasNext()) {
+		/*while(sc.hasNext()) {
 			String record = sc.nextLine();
 			if(record.contains(search)) {
 				//	System.out.println(record);
 				String[] res = record.split(";");
 				System.out.println(res[0] + "\t" + res[1] + "\t" + res[2] + "\t" + res[3] + "\t" + res[4] + "\t" + res[5] + "\t" + res[6] + "\t" + res[7] + "\t" + res[8]);
+			}*/
+
+			
+
+			if(!matches.isEmpty()){
+				for(int i=0; i<matches.size();i++){
+					String record = matches.get(i);
+					String[] res = record.split(";");
+					String temp = res[1];
+					res[1] = res[2];
+					res[2] = temp;
+					System.out.println(res[0] + "\t\t" + res[1] + "\t\t" + res[2] + "\t\t" + res[3] + "\t\t" + res[4] + "\t\t" + res[5] + "\t\t" + res[6] + "\t\t" + res[7] + "\t\t" + res[8]);
+				}
 			}
-			else if (matches.isEmpty()){
+			else/*  if (matches.isEmpty())*/{
 				System.out.println("No Record found.");
 				System.out.println("");
 				System.out.println("Would you like to..");
@@ -42,7 +56,7 @@ public class SearchPatientRecord {
 					break;
 				}
 			}
-		}
+		
 		
 		System.out.println("");
 		System.out.println("Enter the patient's UID that you want to display: ");
@@ -63,17 +77,41 @@ public class SearchPatientRecord {
 		menu.main(null);
 	}
 	
-	public void SearchRecord(String search, ArrayList<String> list ) throws FileNotFoundException {
+	public void SearchRecord(int transaction, String search, ArrayList<String> list, ArrayList<Patient> patients) throws FileNotFoundException {
 		String filepath = "Patients.txt";
-		Scanner sc = new Scanner(new File(filepath));
+		//Scanner sc = new Scanner(new File(filepath));
+		//String firstLastName;
+		String bday="";	//need to separate bday from lastname since fullString places middlename between them
 		ArrayList<String> matches = new ArrayList<String>();
+
+		System.out.println("combine = " + search);	//<===
 		
-		while(sc.hasNext()) {
+		/*while(sc.hasNext()) {
 			String record = sc.nextLine();
 			if(record.contains(search)) {
 				matches.add(record);
 			}
+		}*/
+
+		/*if transaction is 2, separate lastname & firstname from bday */
+		if(transaction==2){
+			String[] res = search.split(";");	
+			search = "" + res[0] + ";" + res[1];		
+			bday = res[2];
 		}
+
+		for(int i=0; i<patients.size();i++){
+			String fullString = patients.get(i).getFullString();
+			if(transaction==2){
+				if(fullString.contains(search)&&fullString.contains(bday)) 
+					matches.add(fullString);
+			}
+			else{
+				if(fullString.contains(search)) 
+					matches.add(fullString);
+			}
+		}
+		
 		DisplayPatientRecord(search,matches);
 	}
 }

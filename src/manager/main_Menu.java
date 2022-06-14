@@ -47,7 +47,7 @@ public class main_Menu {
 							break;
 						case "4":
 							try {
-								record.SearchPatientRecord();
+								record.SearchPatientRecord(patients);
 							} catch (FileNotFoundException e) {
 								e.printStackTrace();
 							}
@@ -115,8 +115,8 @@ public class main_Menu {
 				NI = x.next();
 				x.nextLine();
 				//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
-				
-				patients.add(new Patient(UID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NI));
+				String fullString = "" + UID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NI;
+				patients.add(new Patient(fullString, UID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NI));
 			}
 
 		} catch (Exception e) {
