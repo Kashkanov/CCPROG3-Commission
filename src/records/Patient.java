@@ -13,6 +13,8 @@ public class Patient {
     public String nationalID;
     public int UIDE;
     public String UIDD;
+    public char deleted;
+    public String delReason;
 
     public Patient(String fullString, String UID, String lastName, String firstName, String middleName, long birthday, char gender, String address, 
         String number, String nationalID){
@@ -80,11 +82,17 @@ public class Patient {
 
     public void isolateE(){
         this.UIDE = Integer.parseInt(this.UID.substring(10));
-        System.out.println("UIDE = " + this.UIDE); //<===
     }
 
     public void isolateD(){
         this.UIDD = this.UID.substring(7, 10);
+    }
+
+    /*this is called to modify patient info once they are deleted */
+    public void deletePatient(String delReason){
+        this.deleted = 'D';
+        this.delReason = delReason;
+        this.fullString = fullString  + this.deleted + ';' + this.delReason + ";"; 
     }
 
     

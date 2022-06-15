@@ -42,6 +42,7 @@ public class AddNewPatient {
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
 
+			pw.print(patient.getFullString() + ";");
 			/*
 			for (int i = 0; i < this.list.size(); i++) {
 				removeDuplicate(this.list);
@@ -51,8 +52,8 @@ public class AddNewPatient {
 					pw.println();
 					k = 0;
 				}
-			}*/
-
+			}
+			
 			pw.print(patient.getUID() + ";");
 			pw.print(patient.getFirstName() + ";");
 			pw.print(patient.getlastName() + ";");
@@ -61,7 +62,7 @@ public class AddNewPatient {
 			pw.print(patient.getGender() + ";");
 			pw.print(patient.getAddress() + ";");
 			pw.print(patient.getNumber() + ";");
-			pw.print(patient.getNationalID() + ";");
+			pw.print(patient.getNationalID() + ";");*/
 			pw.print("\n");
 			pw.flush();
 
@@ -152,6 +153,8 @@ public class AddNewPatient {
 		char d1 = lastD.charAt(0);
 		char d2 = lastD.charAt(1);
 		char d3 = lastD.charAt(2);
+
+		//4lastE = 99; // <=== testing lang
 
 		if(lastE == 99){
 			d3++;

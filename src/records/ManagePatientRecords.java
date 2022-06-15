@@ -151,12 +151,61 @@ public class ManagePatientRecords {
 
 	}
 
-	public void DeletePatientRecord() {
+	public void DeletePatientRecord(ArrayList<Patient> patients) {
 		String input;
 
-		System.out.println("Input Unique Identifier: ");
+		/*System.out.println("Input Unique Identifier: ");
 		input = sc.nextLine();
-		delete.DeleteRecord();
+		delete.DeleteRecord();*/
+		String UI;
+		String LN;
+		String FN;
+		String BD;
+		String NID;
+
+		System.out.println("Search Patient Record");
+		System.out.println("");
+
+		System.out.println("Select Preffered Input:");
+		System.out.println("[1] Unique Identifier");
+		System.out.println("[2] Last Name, First Name & Birthday");
+		System.out.println("[3] National ID Number");
+		System.out.println("[X] Return");
+		String transaction = sc.nextLine();
+
+		switch (transaction) {
+			case "1":
+				// If Unique Identifier
+				System.out.println("Input Unique Identifier: ");
+				UI = sc.nextLine();
+				delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
+
+				break;
+			case "2":
+				// If Last Name, First Name & Birthday
+				System.out.println("Last Name: ");
+				LN = sc.nextLine();
+
+				System.out.println("First Name: ");
+				FN = sc.nextLine();
+
+				System.out.println("Birthday(YYYYMMDD): ");
+				BD = sc.nextLine();
+
+				String combine = FN + ";" + LN + ";" + BD + ";";
+				delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
+				
+				break;
+			case "3":
+				// If National ID
+				System.out.println("National ID no.: ");
+				NID = sc.nextLine();
+				delete.SearchPatientRecord(Integer.parseInt(transaction), NID, patients);
+				break;
+			case "X":
+				menu.main(null);
+				break;
+		}
 	}
 
 }

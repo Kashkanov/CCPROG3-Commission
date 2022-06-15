@@ -19,7 +19,7 @@ public class main_Menu {
 
 		main_Menu menu = new main_Menu();
 
-		menu.readPatients(patients);
+		//menu.readPatients(patients);
 		menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 
@@ -43,7 +43,7 @@ public class main_Menu {
 							break;
 						case "3":
 							// Delete
-							record.DeletePatientRecord();
+							record.DeletePatientRecord(patients);
 							break;
 						case "4":
 							try {
@@ -92,19 +92,24 @@ public class main_Menu {
 		System.out.print("Select a transaction: ");
 	}
 
+	/*puts all patient data from patients.txt excluding the deleted patients
+	 * 
+	 */
 	public void readPatients(ArrayList<Patient> patients){
 		String filepath = "Patients.txt";
-		boolean found;
+		/*boolean found;
 		String UID, LastName, FirstName, MiddleName,
-				Birthday, Gender, Address, Phone, NI;
+				Birthday, Gender, Address, Phone, NI*/;
 		
 		try {
 			Scanner x = new Scanner(new File(filepath));
-			x.useDelimiter(";");
+			//x.useDelimiter(";");
 			System.out.println(x);
 
 			while (x.hasNext()) {
-				UID = x.next();
+				String fullString = x.next();
+				
+				/*UID = x.next();
 				LastName = x.next();
 				FirstName = x.next();
 				MiddleName = x.next();
@@ -112,11 +117,19 @@ public class main_Menu {
 				Gender = x.next();
 				Address = x.next();
 				Phone = x.next();
-				NI = x.next();
+				NI = x.next();*/
+				//String D = x.next();
+				//String reason = x.next();
 				x.nextLine();
-				//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
-				String fullString = "" + UID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NI;
-				patients.add(new Patient(fullString, UID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NI));
+				String[] splitString = fullString.split(";");
+					
+					//System.out.println("deleted");	//<===
+				if(splitString.length <= 9 ){
+					//System.out.println(fullString);	//<===
+					patients.add(new Patient(fullString, splitString[0], splitString[1], splitString[2], splitString[3], Long.parseLong(splitString[4]), splitString[5].charAt(0), splitString[6], splitString[7], splitString[8]));
+				}//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
+				//String fullString = "" + UID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NI;
+				
 			}
 
 		} catch (Exception e) {
@@ -129,7 +142,7 @@ public class main_Menu {
 	public void printPatients(ArrayList<Patient> patients){
 		System.out.println("Patients:");
 		for(int i=0; i<patients.size();i++){
-			System.out.println(patients.get(i).getUID());
+			System.out.println(patients.get(i).getFullString());
 		}
 	}
 }
