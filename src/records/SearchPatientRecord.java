@@ -44,7 +44,7 @@ public class SearchPatientRecord {
 				System.out.println("Would you like to..");
 				System.out.println("[1] Search Again");
 				System.out.println("[2] Return to Main Menu");
-				System.out.println("Select a transaction: ");
+				System.out.print("Select a transaction: ");
 				int transaction = scan.nextInt();
 				
 				switch(transaction) {
@@ -87,12 +87,19 @@ public class SearchPatientRecord {
 			}
 		}
 		else{
-			System.out.println(patients.get(0).getUID());
-			System.out.println(patients.get(0).getlastName() + ", " + patients.get(0).getFirstName() + " " + patients.get(0).getMiddleName());
-			System.out.println(patients.get(0).getBirthday());
-			System.out.println(patients.get(0).getAddress());
-			System.out.println(patients.get(0).getNumber());
-			System.out.println(patients.get(0).getNationalID());
+			String word = matches.get(0);
+			String UID = word.substring(0, word.indexOf(';'));
+			for(int i=0;i<patients.size();i++){
+				//System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" + patientUID.equals(patients.get(i).getUID()));
+				if(UID.equals(patients.get(i).getUID())){
+					System.out.println(patients.get(i).getUID());
+					System.out.println(patients.get(i).getlastName() + ", " + patients.get(i).getFirstName() + " " + patients.get(i).getMiddleName());
+					System.out.println(patients.get(i).getBirthday());
+					System.out.println(patients.get(i).getAddress());
+					System.out.println(patients.get(i).getNumber());
+					System.out.println(patients.get(i).getNationalID());
+				}
+			}
 		}
 		
 		

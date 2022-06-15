@@ -32,6 +32,24 @@ public class Patient {
             isolateD();
     }
 
+    public Patient(String fullString, String UID, String lastName, String firstName, String middleName, long birthday, char gender, String address, 
+        String number, String nationalID, String reason){
+            this.fullString = fullString;
+            this.UID = UID;
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.birthday = birthday;
+            this.gender = gender;
+            this.address = address;
+            this.number = number;
+            this.nationalID = nationalID;
+            this.deleted = 'D';
+            this.delReason = reason;
+            isolateE();
+            isolateD();
+    }
+
     public String getFullString(){
         return this.fullString;
     }
@@ -86,6 +104,18 @@ public class Patient {
 
     public void isolateD(){
         this.UIDD = this.UID.substring(7, 10);
+    }
+
+    public void setAdress(String newAddress){
+        this.address = newAddress;
+        this.fullString = "" + this.UID + ";" + this.lastName + ";" + this.firstName  + ";" + this.middleName+ ";" + 
+            this.birthday + ";" + this.gender + ";" + newAddress + ";" + this.number + ";" + nationalID + ";";
+    }
+
+    public void setNumber(String newNumber){
+        this.number = newNumber;
+        this.fullString = "" + this.UID + ";" + this.lastName + ";" + this.firstName  + ";" + this.middleName+ ";" + 
+            this.birthday + ";" + this.gender + ";" + this.address + ";" + newNumber + ";" + nationalID + ";";
     }
 
     /*this is called to modify patient info once they are deleted */

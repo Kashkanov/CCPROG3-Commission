@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//TODO: search again should return to search function
+
 public class DeletePatientRecord {
 	
 	//Properties
@@ -43,12 +45,12 @@ public class DeletePatientRecord {
 				System.out.println("Would you like to..");
 				System.out.println("[1] Search Again");
 				System.out.println("[2] Return to Main Menu");
-				System.out.println("Select a transaction: ");
+				System.out.print("Select a transaction: ");
 				int transaction = scan.nextInt();
 				
 				switch(transaction) {
 				case 1:
-					System.out.println("Back to Search Patient Record");
+					System.out.println("Back to Delete Patient Record");
 					break;
 				case 2:
 					ReturnMainMenu();
@@ -152,6 +154,7 @@ public class DeletePatientRecord {
 			} catch (IOException io) {
 			}
 		}
+		System.out.println("\nData of patient" + patientUID + "has been deleted.");
 		ReturnMainMenu();
 	}
 	

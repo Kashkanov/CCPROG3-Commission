@@ -23,6 +23,7 @@ public class ManagePatientRecords {
 	private int NewPatientCount = 0;
 	private AddNewPatient addPatient = new AddNewPatient();
 	private SearchPatientRecord search = new SearchPatientRecord();
+	private EditPatient edit = new EditPatient();
 	private DeletePatientRecord delete = new DeletePatientRecord();
 
 	private manager.main_Menu menu = new manager.main_Menu();
@@ -30,7 +31,57 @@ public class ManagePatientRecords {
 	private ArrayList<String> list = new ArrayList<String>();
 	
 	// Method
-	public void EditPatient() {
+	public void EditPatient(ArrayList<Patient> patients) {
+		String UI;
+		String LN;
+		String FN;
+		String BD;
+		String NID;
+
+		System.out.println("Search Patient Record");
+		System.out.println("");
+
+		System.out.println("Select Preffered Input:");
+		System.out.println("[1] Unique Identifier");
+		System.out.println("[2] Last Name, First Name & Birthday");
+		System.out.println("[3] National ID Number");
+		System.out.println("[X] Return");
+		String transaction = sc.nextLine();
+
+		switch (transaction) {
+			case "1":
+				// If Unique Identifier
+				System.out.println("Input Unique Identifier: ");
+				UI = sc.nextLine();
+				edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+
+				break;
+			case "2":
+				// If Last Name, First Name & Birthday
+				System.out.println("Last Name: ");
+				LN = sc.nextLine();
+
+				System.out.println("First Name: ");
+				FN = sc.nextLine();
+
+				System.out.println("Birthday(YYYYMMDD): ");
+				BD = sc.nextLine();
+
+				String combine = FN + ";" + LN + ";" + BD + ";";
+				
+				edit.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+				break;
+			case "3":
+				// If National ID
+				System.out.println("National ID no.: ");
+				NID = sc.nextLine();
+				edit.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
+				break;
+			case "X":
+				menu.main(null);
+				break;
+		}
+
 
 	}
 

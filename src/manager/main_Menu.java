@@ -19,8 +19,8 @@ public class main_Menu {
 
 		main_Menu menu = new main_Menu();
 
-		//menu.readPatients(patients);
-		menu.printPatients(patients);
+		menu.readPatients(patients);
+		//menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 
 		try (Scanner sc = new Scanner(System.in)) {
@@ -39,7 +39,7 @@ public class main_Menu {
 							break;
 						case "2":
 							// Edit
-							record.EditPatient();
+							record.EditPatient(patients);
 							break;
 						case "3":
 							// Delete
@@ -107,7 +107,7 @@ public class main_Menu {
 			System.out.println(x);
 
 			while (x.hasNext()) {
-				String fullString = x.next();
+				String fullString = x.nextLine();
 				
 				/*UID = x.next();
 				LastName = x.next();
@@ -120,14 +120,19 @@ public class main_Menu {
 				NI = x.next();*/
 				//String D = x.next();
 				//String reason = x.next();
-				x.nextLine();
+				//x.nextLine();
 				String[] splitString = fullString.split(";");
 					
 					//System.out.println("deleted");	//<===
 				if(splitString.length <= 9 ){
 					//System.out.println(fullString);	//<===
 					patients.add(new Patient(fullString, splitString[0], splitString[1], splitString[2], splitString[3], Long.parseLong(splitString[4]), splitString[5].charAt(0), splitString[6], splitString[7], splitString[8]));
-				}//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
+				}else{
+					//System.out.println("reason = );	//<===
+					patients.add(new Patient(fullString, splitString[0], splitString[1], splitString[2], splitString[3], Long.parseLong(splitString[4]), splitString[5].charAt(0), splitString[6], splitString[7], splitString[8], splitString[10]));
+					
+				}
+				//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
 				//String fullString = "" + UID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NI;
 				
 			}
