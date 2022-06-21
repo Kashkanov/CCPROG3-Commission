@@ -5,8 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 import manager.main_Menu;
+
+//TODO: Refuse to save patient
 
 public class ManagePatientRecords {
 
@@ -87,6 +90,7 @@ public class ManagePatientRecords {
 	}*/
 
 	public void AddNewPatient(ArrayList<Patient> patients) {
+		File f1 = new File("patients.txt");
 
 		String lastD = patients.get(patients.size()-1).getD(); //<===
 		int lastE = patients.get(patients.size()-1).getE(); //<===
@@ -116,12 +120,17 @@ public class ManagePatientRecords {
 
 		System.out.println("National ID no.: ");
 		NationalID = sc.nextLine();
-		
+
+		while(add.isNIDUnique(patients, NationalID)==false&&f1.exists()){
+			System.out.println("National ID Already Exists! Enter a new one");
+			System.out.println("National ID no.: ");
+			NationalID = sc.nextLine();
+		}
 
 		System.out.println("Save Patient Record[Y/N]? ");
 		transaction = sc.nextLine();
 
-		NewPatientCount++;
+		//NewPatientCount++;
 		do {
 			if (transaction.equals("Y") || transaction.equals("y")) {
 				// Save Patient Record
@@ -129,16 +138,7 @@ public class ManagePatientRecords {
 				System.out.println("new UID is " + newUID);
 				String fullString = "" + newUID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NationalID;
 				patients.add(new Patient(fullString, newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NationalID));
-				/*list.add(addPatient.GetUniqueIdentifier(NewPatientCount));
-				list.add(FirstName);
-				list.add(LastName);
-				list.add(MiddleName);
-				list.add(Birthday);
-				list.add(Gender);
-				list.add(Address);
-				list.add(Phone);
-				list.add(NationalID);
-				System.out.println(list); //<=== */
+				
 				
 				add.SaveRecord(patients.get(patients.size()-1));
 				

@@ -93,6 +93,16 @@ public class AddNewPatient {
 		this.list.clear();
 		this.list.addAll(temp);
 	}
+	public boolean isNIDUnique(ArrayList<Patient> patients, String NID){
+
+		for(int i=0;i<patients.size();i++){
+			//if the National ID already exists in the patient array, return false
+			if(NID.contains(patients.get(i).getNationalID())){
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public String GetUniqueIdentifier(int NewPatientCount, String lastD, int lastE) {
 		// int newPatientCount = 101; //For TEST

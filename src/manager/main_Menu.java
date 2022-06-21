@@ -1,10 +1,13 @@
 package manager;
 import records.Patient;
+import service.Service;
 
+import java.io.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 public class main_Menu {
 
@@ -14,14 +17,21 @@ public class main_Menu {
 
 	public static void main(String[] args) {
 		// Constructor
-		
+		File f1 = new File("Patients.txt");
+		File f2 = new File("Services.txt");
 		ArrayList<Patient> patients = new ArrayList<Patient>();
+		ArrayList<Service> services = new ArrayList<Service>();
 
 		main_Menu menu = new main_Menu();
 
-		menu.readPatients(patients);
-		menu.printPatients(patients);
+		if(f1.exists())
+			menu.readPatients(patients);
+		if(f2.exists())
+			menu.readServices(services);
+
+		//menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
+		service.ManageServices service = new service.ManageServices();
 
 		try (Scanner sc = new Scanner(System.in)) {
 			menu.displayMainMenu();
@@ -59,7 +69,29 @@ public class main_Menu {
 					}
 					break;
 				case 2:
-					System.out.println("Manage Services");
+				menu.displayManageServices();
+				variable = sc.nextLine();
+				switch (variable) {
+					case "1":
+						// Add
+						service.AddNewService(services);
+
+						break;
+					case "2":
+						// Search
+					
+					case "3":
+						// Delete
+					
+						break;
+					case "4":
+						// Edit
+					
+						break;
+					case "X":
+						main_Menu.main(null);
+						break;
+				}
 					break;
 				case 3:
 					System.out.println("Manage Laboratory Results");
@@ -93,15 +125,22 @@ public class main_Menu {
 		System.out.print("Select a transaction: ");
 	}
 
+	public void displayManageServices() {
+		System.out.println("Manage Patient Records");
+		System.out.println("[1] Add New Service");
+		System.out.println("[2] Search Service");
+		System.out.println("[3] Delete Service");
+		System.out.println("[4] Search Edit Service");
+		System.out.println("[X] Return to Main Menu\n");
+		System.out.print("Select a transaction: ");
+	}
+
 	/*puts all patient data from patients.txt excluding the deleted patients
 	 * 
 	 */
 	public void readPatients(ArrayList<Patient> patients){
 		String filepath = "Patients.txt";
-		/*boolean found;
-		String UID, LastName, FirstName, MiddleName,
-				Birthday, Gender, Address, Phone, NI*/;
-		
+
 		try {
 			Scanner x = new Scanner(new File(filepath));
 			//x.useDelimiter(";");
@@ -110,18 +149,6 @@ public class main_Menu {
 			while (x.hasNext()) {
 				String fullString = x.nextLine();
 				
-				/*UID = x.next();
-				LastName = x.next();
-				FirstName = x.next();
-				MiddleName = x.next();
-				Birthday = x.next();
-				Gender = x.next();
-				Address = x.next();
-				Phone = x.next();
-				NI = x.next();*/
-				//String D = x.next();
-				//String reason = x.next();
-				//x.nextLine();
 				String[] splitString = fullString.split(";");
 					
 					//System.out.println("deleted");	//<===
@@ -133,9 +160,7 @@ public class main_Menu {
 					patients.add(new Patient(fullString, splitString[0], splitString[1], splitString[2], splitString[3], Long.parseLong(splitString[4]), splitString[5].charAt(0), splitString[6], splitString[7], splitString[8], splitString[10]));
 					
 				}
-				//System.out.println(UID + " " + LastName + " " + Birthday + " " + Gender + " " + Address + " " + Phone + " " + NI);	//<===
-				//String fullString = "" + UID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NI;
-				
+					
 			}
 
 		} catch (Exception e) {
@@ -143,12 +168,43 @@ public class main_Menu {
 		}
 
 	}
-
+	
 	//for testing
 	public void printPatients(ArrayList<Patient> patients){
 		System.out.println("Patients:");
 		for(int i=0; i<patients.size();i++){
 			System.out.println(patients.get(i).getFullString());
 		}
+	}
+
+	public void readServices(ArrayList<Service> services){
+		String filepath = "Services.txt";
+
+		try {
+			Scanner x = new Scanner(new File(filepath));
+			//x.useDelimiter(";");
+			System.out.println(x);
+
+			while (x.hasNext()) {
+				String fullString = x.nextLine();
+				
+				String[] splitString = fullString.split(";");
+					
+				System.out.println("splitlength" + splitString.length);	//<===
+				if(splitString.length > 3 ){
+					//System.out.println(fullString);	//<===
+					services.add(new Service(fullString, splitString[0], splitString[1], Integer.parseInt(splitString[2]), splitString[3]));
+				}else{
+					//System.out.println("reason = );	//<===
+					services.add(new Service(fullString, splitString[0], splitString[1], Integer.parseInt(splitString[2])));
+					
+				}
+					
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }
