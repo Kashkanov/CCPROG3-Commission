@@ -21,7 +21,7 @@ public class ManagePatientRecords {
 	private String NationalID;
 	private String transaction;
 	private int NewPatientCount = 0;
-	private AddNewPatient addPatient = new AddNewPatient();
+	private AddNewPatient add = new AddNewPatient();
 	private SearchPatientRecord search = new SearchPatientRecord();
 	private EditPatient edit = new EditPatient();
 	private DeletePatientRecord delete = new DeletePatientRecord();
@@ -31,6 +31,7 @@ public class ManagePatientRecords {
 	private ArrayList<String> list = new ArrayList<String>();
 	
 	// Method
+	/*
 	public void EditPatient(ArrayList<Patient> patients) {
 		String UI;
 		String LN;
@@ -83,7 +84,7 @@ public class ManagePatientRecords {
 		}
 
 
-	}
+	}*/
 
 	public void AddNewPatient(ArrayList<Patient> patients) {
 
@@ -124,7 +125,7 @@ public class ManagePatientRecords {
 		do {
 			if (transaction.equals("Y") || transaction.equals("y")) {
 				// Save Patient Record
-				String newUID = addPatient.GetUniqueIdentifier(NewPatientCount, lastD, lastE);
+				String newUID = add.GetUniqueIdentifier(NewPatientCount, lastD, lastE);
 				System.out.println("new UID is " + newUID);
 				String fullString = "" + newUID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday + ";" + Gender + ";" + Address  + ";" + Phone + ";" + NationalID;
 				patients.add(new Patient(fullString, newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday), Gender.charAt(0), Address, Phone, NationalID));
@@ -138,7 +139,8 @@ public class ManagePatientRecords {
 				list.add(Phone);
 				list.add(NationalID);
 				System.out.println(list); //<=== */
-				addPatient.SaveRecord(patients.get(patients.size()-1));
+				
+				add.SaveRecord(patients.get(patients.size()-1));
 				
 				main_Menu.main(null);
 			} else if (transaction.equals("N") || transaction.equals("n")) {
@@ -148,7 +150,7 @@ public class ManagePatientRecords {
 		} while (!(transaction.equals("Y") || transaction.equals("y") || transaction.equals("N")
 				|| transaction.equals("n")));
 	}
-
+/*
 	public void SearchPatientRecord(ArrayList<Patient> patients) throws FileNotFoundException {
 		String UI;
 		String LN;
@@ -208,7 +210,7 @@ public class ManagePatientRecords {
 		/*System.out.println("Input Unique Identifier: ");
 		input = sc.nextLine();
 		delete.DeleteRecord();*/
-		String UI;
+		/*String UI;
 		String LN;
 		String FN;
 		String BD;
@@ -257,6 +259,94 @@ public class ManagePatientRecords {
 				menu.main(null);
 				break;
 		}
-	}
+	}*/
+	
+	public void ProcessPatientRecord(ArrayList<Patient> patients, int choice) {
+		String input;
 
+		/*System.out.println("Input Unique Identifier: ");
+		input = sc.nextLine();
+		delete.DeleteRecord();*/
+		String UI;
+		String LN;
+		String FN;
+		String BD;
+		String NID;
+
+		System.out.println("Search Patient Record");
+		System.out.println("");
+
+		System.out.println("Select Preffered Input:");
+		System.out.println("[1] Unique Identifier");
+		System.out.println("[2] Last Name, First Name & Birthday");
+		System.out.println("[3] National ID Number");
+		System.out.println("[X] Return");
+		String transaction = sc.nextLine();
+
+		switch (transaction) {
+			case "1":
+				System.out.println("Input Unique Identifier: ");
+				UI = sc.nextLine();
+				switch(choice){
+					case 2:	//edit
+						edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+					break;
+					case 3:	//delete
+						delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
+					break;
+					case 4:	//search
+						search.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+					break;
+
+				}
+				break;
+			case "2":
+				// If Last Name, First Name & Birthday
+				System.out.println("Last Name: ");
+				LN = sc.nextLine();
+
+				System.out.println("First Name: ");
+				FN = sc.nextLine();
+
+				System.out.println("Birthday(YYYYMMDD): ");
+				BD = sc.nextLine();
+
+				String combine = FN + ";" + LN + ";" + BD + ";";
+				switch(choice){
+					case 2:	//edit
+						edit.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+					break;
+					case 3:	//delete
+					delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
+					break;
+					case 4:	//search
+						search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+					break;
+
+				}
+				
+				
+				break;
+			case "3":
+				// If National ID
+				System.out.println("National ID no.: ");
+				NID = sc.nextLine();
+				switch(choice){
+					case 2:	//edit
+						edit.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
+					break;
+					case 3:	//delete
+						delete.SearchPatientRecord(Integer.parseInt(transaction), NID, patients);
+					case 4:	//search
+						search.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
+					break;
+
+				}
+				
+				break;
+			case "X":
+				menu.main(null);
+				break;
+		}
+	}
 }

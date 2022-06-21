@@ -20,7 +20,7 @@ public class main_Menu {
 		main_Menu menu = new main_Menu();
 
 		menu.readPatients(patients);
-		//menu.printPatients(patients);
+		menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 
 		try (Scanner sc = new Scanner(System.in)) {
@@ -39,18 +39,19 @@ public class main_Menu {
 							break;
 						case "2":
 							// Edit
-							record.EditPatient(patients);
+							record.ProcessPatientRecord(patients, 2);
 							break;
 						case "3":
 							// Delete
-							record.DeletePatientRecord(patients);
+							record.ProcessPatientRecord(patients, 3);
 							break;
 						case "4":
-							try {
-								record.SearchPatientRecord(patients);
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
+							//Search
+							//try {
+								record.ProcessPatientRecord(patients, 4);
+							//} catch (FileNotFoundException e) {
+							//	e.printStackTrace();
+							//}
 							break;
 						case "X":
 							main_Menu.main(null);

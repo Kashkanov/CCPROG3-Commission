@@ -4,6 +4,8 @@ import java.util.*;
 
 import manager.main_Menu;
 
+import records.ManagePatientRecords;
+
 import java.io.*;
 
 //TODO: search again should return to search function
@@ -12,7 +14,7 @@ public class SearchPatientRecord {
 	main_Menu menu = new main_Menu();
 	
 	//Methods
-	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients) throws FileNotFoundException {
+	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients) {
 		//String filepath = "Patients.txt";
 		//Scanner sc = new Scanner(new File(filepath));
 		Scanner scan = new Scanner(System.in);
@@ -49,7 +51,9 @@ public class SearchPatientRecord {
 				
 				switch(transaction) {
 				case 1:
+					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Search Patient Record");
+					mng.ProcessPatientRecord(patients, 4);
 					break;
 				case 2:
 					menu.main(null);
@@ -108,7 +112,7 @@ public class SearchPatientRecord {
 		menu.main(null);
 	}
 	
-	public void SearchRecord(int transaction, String search, ArrayList<String> list, ArrayList<Patient> patients) throws FileNotFoundException {
+	public void SearchRecord(int transaction, String search, ArrayList<String> list, ArrayList<Patient> patients) {
 		//String filepath = "Patients.txt";
 		//Scanner sc = new Scanner(new File(filepath));
 		//String firstLastName;

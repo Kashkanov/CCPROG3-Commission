@@ -47,7 +47,9 @@ public class EditPatient {
 				
 				switch(transaction) {
 				case 1:
+					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Edit Patient Record");
+					mng.ProcessPatientRecord(patients, 4);
 					break;
 				case 2:
 					ReturnMainMenu();
