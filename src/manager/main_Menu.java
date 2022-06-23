@@ -78,7 +78,7 @@ public class main_Menu {
 
 						break;
 					case "2":
-						// Search
+						service.ProcessService(services, 2);
 					
 					case "3":
 						// Delete
@@ -190,7 +190,7 @@ public class main_Menu {
 				
 				String[] splitString = fullString.split(";");
 					
-				System.out.println("splitlength" + splitString.length);	//<===
+				
 				if(splitString.length > 3 ){
 					//System.out.println(fullString);	//<===
 					services.add(new Service(fullString, splitString[0], splitString[1], Integer.parseInt(splitString[2]), splitString[3]));

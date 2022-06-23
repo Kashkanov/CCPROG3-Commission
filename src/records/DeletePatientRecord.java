@@ -28,7 +28,6 @@ public class DeletePatientRecord {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Patient's UID" + "\t\t" + "Last Name" + "\t\t" + "First Name" + "\t\t" + "Middle Name" + "\t\t" + "Birthday" + "\t\t" + "Gender" + "\t\t" + "Address" + "\t\t" + "Phone Number" + "\t\t" + "National ID no.");
 		
-
 			if(!matches.isEmpty()){
 				for(int i=0; i<matches.size();i++){
 					String record = matches.get(i);

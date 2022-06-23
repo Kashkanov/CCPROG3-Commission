@@ -276,7 +276,7 @@ public class ManagePatientRecords {
 		System.out.println("Search Patient Record");
 		System.out.println("");
 
-		System.out.println("Select Preffered Input:");
+		System.out.println("Select Prefered Input:");
 		System.out.println("[1] Unique Identifier");
 		System.out.println("[2] Last Name, First Name & Birthday");
 		System.out.println("[3] National ID Number");

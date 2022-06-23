@@ -16,6 +16,9 @@ public class ManageServices {
 	private String price;
 	private String transaction;
 	private AddNewService add = new AddNewService();
+	private SearchService search = new SearchService();
+	private DeleteService delete = new DeleteService();
+	private EditService edit = new EditService();
 
 	private manager.main_Menu menu = new manager.main_Menu();
 	
@@ -27,6 +30,12 @@ public class ManageServices {
 		System.out.println("");
 		System.out.println("Service Code: ");
 		servCode = sc.nextLine();
+		while(add.isServCodeUnique(services, servCode)==false&&f1.exists()){
+			System.out.println("National ID Already Exists! Enter a new one");
+			System.out.println("National ID no.: ");
+			servCode = sc.nextLine();
+		}
+
 		System.out.println("Description: ");
 		description = sc.nextLine();
 		System.out.println("Price: ");
@@ -58,19 +67,65 @@ public class ManageServices {
 		
 
 	
-	
-	
 	//Methods
-	public void SearchService() {
+	public void ProcessService(ArrayList<Service> services, int choice) {
+		String input;
+
+		/*System.out.println("Input Unique Identifier: ");
+		input = sc.nextLine();
+		delete.DeleteRecord();*/
+		String servCode;
+		String keyWord;
+		String UI;
 		
+
+		System.out.println("Search Patient Record");
+		System.out.println("");
+
+		System.out.println("Select Prefered Input:");
+		System.out.println("[1] Service Code");
+		System.out.println("[2] Description Keyword");
+		System.out.println("[X] Return");
+		String transaction = sc.nextLine();
+
+		switch (transaction) {
+			case "1":
+				System.out.println("Input Unique Identifier: ");
+				UI = sc.nextLine();
+				switch(choice){
+					case 2:	//edit
+						search.SearchService(Integer.parseInt(transaction), UI, services);
+					break;
+					/*case 3:	//delete
+						delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
+					break;*/
+				}
+				break;
+			case "2":
+				// If Last Name, First Name & Birthday
+				System.out.println("Enter description keyword: ");
+				String descKey = sc.nextLine();
+
+				switch(choice){
+					case 2:	//edit
+						search.SearchService(Integer.parseInt(transaction), descKey, services);
+					break;
+					/*case 3:	//delete
+					delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
+					break;
+					case 4:	//search
+						search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+					break;*/
+
+				}
+				break;
+			
+			case "X":
+				menu.main(null);
+				break;
+		}
 	}
+		
 	
-	public void DeleteService() {
-		
-	}
-	
-	public void EditService() {
-		
-	}
 	
 }

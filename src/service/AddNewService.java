@@ -1,4 +1,5 @@
 package service;
+import manager.main_Menu;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -55,13 +56,27 @@ public class AddNewService {
 				pw.close();
 				bw.close();
 				fw.close();
+				ReturnMainMenu();
 			} catch (IOException io) {
 			}
 		}
 		
 	}
-	
-	private void ReturnMainMenu() {
-		
+
+	public boolean isServCodeUnique(ArrayList<Service> services, String servCode){
+		for(int i=0;i<services.size();i++){
+			//if the National ID already exists in the patient array, return false
+			if(servCode.contains(services.get(i).getServCode())){
+				return false;
+			}
+		}
+		return true;
 	}
+	
+
+	private void ReturnMainMenu() {
+		main_Menu menu = new main_Menu();
+		menu.main(null);
+	}
+	
 }
