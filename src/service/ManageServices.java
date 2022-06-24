@@ -89,7 +89,7 @@ public class ManageServices {
 
 		switch (transaction) {
 			case "1":
-				System.out.println("Input Unique Identifier: ");
+				System.out.println("Input service code: ");
 				UI = sc.nextLine();
 				switch (choice) {
 					case 2: // edit
@@ -125,6 +125,50 @@ public class ManageServices {
 			case "X":
 				main_Menu.main(null);
 				break;
+		}
+	}
+
+	public void EditService(ArrayList<Service> services) {
+		Scanner sc = new Scanner(System.in);
+		String transaction;
+		int i = 0, resIndex = -1;
+		boolean found = false;
+
+		System.out.println("Edit Service");
+		System.out.println(
+				"\nThe services cannot be edited. If you would like to edit an existing service,");
+		System.out.println(
+				"the service will first be deleted, and new service will be created. Would you like to proceed? [Y/N]");
+		System.out.print("Enter choice: ");
+		String decision = sc.nextLine();
+
+		if (decision.equals("y") || decision.equals("Y")) {
+			System.out.println("Select Prefered Input:");
+			System.out.println("[1] Service Code");
+			System.out.println("[2] Description Keyword");
+			System.out.println("[X] Return");
+			transaction = sc.nextLine();
+
+			switch (transaction) {
+				case "1":
+					System.out.println("Input service code: ");
+					String servCode = sc.nextLine();
+					edit.SearchService(1, servCode, services);
+					break;
+				case "2":
+					System.out.println("Enter description keyword: ");
+					String descKey = sc.nextLine();
+					edit.SearchService(2, descKey, services);
+					break;
+
+				case "X":
+					main_Menu.main(null);
+					break;
+			}
+		} else {
+			System.out.println("");
+			System.out.println("Back to Main Menu...");
+			main_Menu.main(null);
 		}
 	}
 
