@@ -86,7 +86,7 @@ public class main_Menu {
 							break;
 						case "4":
 							// Edit
-							service.ProcessService(services, 4);
+							service.EditService(services);
 							break;
 						case "X":
 							main_Menu.main(null);
