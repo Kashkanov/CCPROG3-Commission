@@ -27,7 +27,7 @@ public class DeleteService {
 				System.out.println(services.get(matchesInd.get(i)).getServCode() + "\t\t"
 						+ services.get(matchesInd.get(i)).getDescription() + "\t\t"
 						+ services.get(matchesInd.get(i)).getPrice());
-				
+
 			}
 		} else/* if (matches.isEmpty()) */ {
 			System.out.println("No Record found.");
@@ -65,12 +65,11 @@ public class DeleteService {
 				// System.out.println(servCode + " == " + services.get(i).getServCode() + "//" +
 				// servCode.equals(services.get(i).getServCode())); //<===
 				if (servCode.equals(services.get(i).getServCode())) {
-					DeleteService(services.get(i).getServCode(), services);
+					DeleteService(services.get(i).getServCode(), services, false);
 				}
 			}
-		}
-		else{
-			DeleteService(services.get(matchesInd.get(0)).getServCode(), services);
+		} else {
+			DeleteService(services.get(matchesInd.get(0)).getServCode(), services, false);
 		}
 
 		System.out.println("");
@@ -78,7 +77,7 @@ public class DeleteService {
 		ReturnMainMenu();
 	}
 
-	private void DeleteService(String servCode, ArrayList<Service> services) {
+	public void DeleteService(String servCode, ArrayList<Service> services, Boolean fromEdit) {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("State reason for deletion: ");
@@ -91,7 +90,10 @@ public class DeleteService {
 			for (int i = 0; i < services.size(); i++) {
 				if (servCode.equals(services.get(i).getServCode())) {
 					services.get(i).deleteService(delReason);
-					saveChanges(services.get(i).getServCode(), services.get(i).getDescription(), services);
+					if (!fromEdit)
+						saveChanges(services.get(i).getServCode(), services.get(i).getDescription(), services, false);
+					else
+						saveChanges(services.get(i).getServCode(), services.get(i).getDescription(), services, true);
 				}
 			}
 
@@ -99,7 +101,7 @@ public class DeleteService {
 			ReturnMainMenu();
 	}
 
-	private void saveChanges(String servCode, String desc, ArrayList<Service> services) {
+	private void saveChanges(String servCode, String desc, ArrayList<Service> services, Boolean fromEdit) {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter pw = null;
@@ -128,7 +130,10 @@ public class DeleteService {
 			}
 		}
 		System.out.println("\n" + servCode + " " + desc + " has been deleted.");
-		ReturnMainMenu();
+		if (!fromEdit) {
+			ReturnMainMenu();
+		}
+
 	}
 
 	public void SearchService(int transaction, String key, ArrayList<Service> services) {
