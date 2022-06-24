@@ -2,3 +2,4 @@ CRP;Covid-19 RT-PCR;2000;
 CAT;Covid-19 Antigen Test;1000;
 CBT;Covid-19 Antibody Test;500;
 SSR;Head Removal Surgery;123;
+JBL;Testing kapag eluts;200;D;haha idk;
