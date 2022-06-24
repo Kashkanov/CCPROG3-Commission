@@ -114,19 +114,6 @@ public class DeletePatientRecord {
 			}
 		}
 
-		
-		/*try {
-			
-			File myObj = new File("Patients.txt");
-			if (myObj.createNewFile()) {
-				System.out.println("File created: " + myObj.getName());
-			} else {
-				System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}*/
 
 		FileWriter fw = null;
 		BufferedWriter bw = null;

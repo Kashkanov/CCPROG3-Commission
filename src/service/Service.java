@@ -5,8 +5,8 @@ public class Service {
     public String servCode;
     public String description;
     public long price;
-    public char D;
-    public String reason;
+    public char deleted;
+    public String delReason;
 
     public Service(String fullString, String servCode, String description, long price){
         this.fullString = fullString;
@@ -20,8 +20,8 @@ public class Service {
         this.servCode = servCode;
         this.description = description;
         this.price = price;
-        this.D = 'D';
-        this.reason = reason;
+        this.deleted = 'D';
+        this.delReason = reason;
     }
 
     public String getFullString(){
@@ -38,6 +38,12 @@ public class Service {
 
     public long getPrice(){
         return this.price;
+    }
+
+    public void deleteService(String delReason){
+        this.deleted = 'D';
+        this.delReason = delReason;
+        this.fullString = fullString  + this.deleted + ';' + this.delReason + ";"; 
     }
 
 

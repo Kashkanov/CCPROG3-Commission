@@ -82,7 +82,7 @@ public class main_Menu {
 					
 					case "3":
 						// Delete
-					
+						service.ProcessService(services, 3);
 						break;
 					case "4":
 						// Edit

@@ -107,12 +107,13 @@ public class ManageServices {
 				String descKey = sc.nextLine();
 
 				switch(choice){
-					case 2:	//edit
+					case 2:	//search
 						search.SearchService(Integer.parseInt(transaction), descKey, services);
 					break;
-					/*case 3:	//delete
-					delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
+					case 3:	//delete
+						delete.SearchService(Integer.parseInt(transaction), descKey, services);
 					break;
+					/*
 					case 4:	//search
 						search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
 					break;*/

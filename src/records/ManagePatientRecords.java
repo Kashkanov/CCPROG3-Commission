@@ -92,8 +92,8 @@ public class ManagePatientRecords {
 	public void AddNewPatient(ArrayList<Patient> patients) {
 		File f1 = new File("patients.txt");
 
-		String lastD = patients.get(patients.size()-1).getD(); //<===
-		int lastE = patients.get(patients.size()-1).getE(); //<===
+		String lastD = patients.get(patients.size()-1).getD(); 
+		int lastE = patients.get(patients.size()-1).getE();
 
 		System.out.println("Add New Patient");
 		System.out.println("");
