@@ -27,6 +27,7 @@ public class DeleteService {
 				System.out.println(services.get(matchesInd.get(i)).getServCode() + "\t\t"
 						+ services.get(matchesInd.get(i)).getDescription() + "\t\t"
 						+ services.get(matchesInd.get(i)).getPrice());
+				
 			}
 		} else/* if (matches.isEmpty()) */ {
 			System.out.println("No Record found.");
@@ -67,6 +68,9 @@ public class DeleteService {
 					DeleteService(services.get(i).getServCode(), services);
 				}
 			}
+		}
+		else{
+			DeleteService(services.get(matchesInd.get(0)).getServCode(), services);
 		}
 
 		System.out.println("");
