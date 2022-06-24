@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 import manager.main_Menu;
 
-	//TODO: Verify service code
+//TODO: Verify service code
 
 public class ManageServices {
-	//Properties
+	// Properties
 	private Scanner sc = new Scanner(System.in);
 	private String servCode;
 	private String description;
@@ -21,16 +21,16 @@ public class ManageServices {
 	private EditService edit = new EditService();
 
 	private manager.main_Menu menu = new manager.main_Menu();
-	
-	//Constructor
+
+	// Constructor
 	public void AddNewService(ArrayList<Service> services) {
 		File f1 = new File("services.txt");
-		
+
 		System.out.println("Add Service");
 		System.out.println("");
 		System.out.println("Service Code: ");
 		servCode = sc.nextLine();
-		while(add.isServCodeUnique(services, servCode)==false&&f1.exists()){
+		while (add.isServCodeUnique(services, servCode) == false && f1.exists()) {
 			System.out.println("National ID Already Exists! Enter a new one");
 			System.out.println("National ID no.: ");
 			servCode = sc.nextLine();
@@ -43,19 +43,19 @@ public class ManageServices {
 
 		System.out.println("Save Service[Y/N]? ");
 		transaction = sc.nextLine();
-		
+
 		do {
 			if (transaction.equals("Y") || transaction.equals("y")) {
 				// Save service
-			
-				String fullString = "" + servCode + ";" + description + ";" + price + ";" ;
+
+				String fullString = "" + servCode + ";" + description + ";" + price + ";";
 				services.add(new Service(fullString, servCode, description, Long.parseLong(price)));
-				
-				System.out.println("services length = " + services.size());	//<===
-				
-				System.out.println("fullstring = " + services.get(services.size()-1).getFullString());	//<====
-				add.SaveRecord(services.get(services.size()-1));
-				
+
+				System.out.println("services length = " + services.size()); // <===
+
+				System.out.println("fullstring = " + services.get(services.size() - 1).getFullString()); // <====
+				add.SaveRecord(services.get(services.size() - 1));
+
 				main_Menu.main(null);
 			} else if (transaction.equals("N") || transaction.equals("n")) {
 				System.out.println("Patient Record was not saved.");
@@ -64,20 +64,19 @@ public class ManageServices {
 		} while (!(transaction.equals("Y") || transaction.equals("y") || transaction.equals("N")
 				|| transaction.equals("n")));
 	}
-		
 
-	
-	//Methods
+	// Methods
 	public void ProcessService(ArrayList<Service> services, int choice) {
 		String input;
 
-		/*System.out.println("Input Unique Identifier: ");
-		input = sc.nextLine();
-		delete.DeleteRecord();*/
+		/*
+		 * System.out.println("Input Unique Identifier: ");
+		 * input = sc.nextLine();
+		 * delete.DeleteRecord();
+		 */
 		String servCode;
 		String keyWord;
 		String UI;
-		
 
 		System.out.println("Search Patient Record");
 		System.out.println("");
@@ -92,13 +91,13 @@ public class ManageServices {
 			case "1":
 				System.out.println("Input Unique Identifier: ");
 				UI = sc.nextLine();
-				switch(choice){
-					case 2:	//edit
+				switch (choice) {
+					case 2: // edit
 						search.SearchService(Integer.parseInt(transaction), UI, services);
-					break;
-					/*case 3:	//delete
-						delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
-					break;*/
+						break;
+					case 3: // delete
+						delete.SearchService(Integer.parseInt(transaction), UI, services);
+						break;
 				}
 				break;
 			case "2":
@@ -106,27 +105,27 @@ public class ManageServices {
 				System.out.println("Enter description keyword: ");
 				String descKey = sc.nextLine();
 
-				switch(choice){
-					case 2:	//search
+				switch (choice) {
+					case 2: // search
 						search.SearchService(Integer.parseInt(transaction), descKey, services);
-					break;
-					case 3:	//delete
+						break;
+					case 3: // delete
 						delete.SearchService(Integer.parseInt(transaction), descKey, services);
-					break;
+						break;
 					/*
-					case 4:	//search
-						search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
-					break;*/
+					 * case 4: //search
+					 * search.SearchRecord(Integer.parseInt(transaction), combine, this.list,
+					 * patients);
+					 * break;
+					 */
 
 				}
 				break;
-			
+
 			case "X":
-				menu.main(null);
+				main_Menu.main(null);
 				break;
 		}
 	}
-		
-	
-	
+
 }

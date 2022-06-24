@@ -1,4 +1,5 @@
 package service;
+
 import manager.main_Menu;
 
 import java.io.File;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 
 public class AddNewService {
-	//Properties
+	// Properties
 	private String ServiceCode;
 	private String Description;
-	private String Price; //might be double or float
+	private String Price; // might be double or float
 	private int transaction;
-	
-	//Method
+
+	// Method
 	public void SaveRecord(Service service) {
 		try {
 			// Creates a new Text file called Patients.txt
@@ -41,7 +42,7 @@ public class AddNewService {
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
 			pw.print(service.getFullString());
-			
+
 			pw.print("\n");
 			pw.flush();
 
@@ -60,23 +61,21 @@ public class AddNewService {
 			} catch (IOException io) {
 			}
 		}
-		
+
 	}
 
-	public boolean isServCodeUnique(ArrayList<Service> services, String servCode){
-		for(int i=0;i<services.size();i++){
-			//if the National ID already exists in the patient array, return false
-			if(servCode.contains(services.get(i).getServCode())){
+	public boolean isServCodeUnique(ArrayList<Service> services, String servCode) {
+		for (int i = 0; i < services.size(); i++) {
+			// if the National ID already exists in the patient array, return false
+			if (servCode.contains(services.get(i).getServCode())) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
 
 	private void ReturnMainMenu() {
-		main_Menu menu = new main_Menu();
-		menu.main(null);
+		main_Menu.main(null);
 	}
-	
+
 }
