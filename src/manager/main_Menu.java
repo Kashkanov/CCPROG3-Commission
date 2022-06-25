@@ -32,6 +32,7 @@ public class main_Menu {
 		// menu.printPatients(patients);
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 		service.ManageServices service = new service.ManageServices();
+		request.ManageLaboratoryRequest request = new request.ManageLaboratoryRequest();
 
 		try (Scanner sc = new Scanner(System.in)) {
 			menu.displayMainMenu();
@@ -79,7 +80,7 @@ public class main_Menu {
 							break;
 						case "2":
 							service.ProcessService(services, 2);
-
+							break;
 						case "3":
 							// Delete
 							service.ProcessService(services, 3);
@@ -94,7 +95,26 @@ public class main_Menu {
 					}
 					break;
 				case 3:
-					System.out.println("Manage Laboratory Results");
+					menu.displayManageLabRequests();
+					variable = sc.nextLine();
+					switch (variable) {
+						case "1":
+							// Add
+							request.AddNewLabRequest(patients, services);
+							break;
+						case "2":
+
+							break;
+						case "3":
+							// Delete
+							break;
+						case "4":
+							// Edit
+							break;
+						case "X":
+							main_Menu.main(null);
+							break;
+					}
 					break;
 				case 4:
 					System.exit(0);
@@ -128,11 +148,21 @@ public class main_Menu {
 	}
 
 	public void displayManageServices() {
-		System.out.println("Manage Patient Records");
+		System.out.println("Manage Services");
 		System.out.println("[1] Add New Service");
 		System.out.println("[2] Search Service");
 		System.out.println("[3] Delete Service");
 		System.out.println("[4] Edit Service");
+		System.out.println("[X] Return to Main Menu\n");
+		System.out.print("Select a transaction: ");
+	}
+
+	public void displayManageLabRequests() {
+		System.out.println("Manage Laboratory Results");
+		System.out.println("[1] Add New Lab Request");
+		System.out.println("[2] Search Lab Request");
+		System.out.println("[3] Delete Lab Request");
+		System.out.println("[4] Edit Lab Request");
 		System.out.println("[X] Return to Main Menu\n");
 		System.out.print("Select a transaction: ");
 	}
