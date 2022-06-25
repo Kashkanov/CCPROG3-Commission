@@ -54,6 +54,7 @@ public class DeletePatientRecord {
 					mng.ProcessPatientRecord(patients, 4);
 					break;
 				case 2:
+					scan.close();
 					ReturnMainMenu();
 					break;
 			}
@@ -95,6 +96,7 @@ public class DeletePatientRecord {
 			System.out.println("Back to Main Menu...");
 			ReturnMainMenu();
 		}
+		
 	}
 
 	private void DeletePatientRecord(String patientUID, ArrayList<Patient> patients) {
@@ -141,7 +143,7 @@ public class DeletePatientRecord {
 			}
 		}
 		System.out.println("\nData of patient " + patientUID + " has been deleted.");
-		scan.close();
+		
 		//ReturnMainMenu();
 	}
 

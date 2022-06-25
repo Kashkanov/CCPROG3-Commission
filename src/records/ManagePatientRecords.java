@@ -157,7 +157,7 @@ public class ManagePatientRecords {
 					|| transaction.equals("n")));
 		
 			System.out.println("Add another user?[Y/N] ");
-			addAnother = sc.next();
+			addAnother = sc.nextLine();
 			
 		}while(addAnother.equals("Y")||addAnother.equals("y"));
 	
@@ -373,9 +373,9 @@ public class ManagePatientRecords {
 
 			
 			System.out.print("Would you like to delete another user?[Y/N] ");
-			delAnother = sc.next();
+			delAnother = sc.nextLine();
 	
 		}while(delAnother.equals("Y")||delAnother.equals("y"));
-
+		main_Menu.main(null);
 	}
 }
