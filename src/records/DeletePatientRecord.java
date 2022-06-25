@@ -100,10 +100,10 @@ public class DeletePatientRecord {
 	private void DeletePatientRecord(String patientUID, ArrayList<Patient> patients) {
 		// System.out.println("nasa delete na ko pre"); //<===
 
-		Scanner sc = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 
 		System.out.print("State reason for deletion: ");
-		String reason = sc.nextLine();
+		String reason = scan.nextLine();
 
 		for (int i = 0; i < patients.size(); i++) {
 			// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
@@ -141,8 +141,8 @@ public class DeletePatientRecord {
 			}
 		}
 		System.out.println("\nData of patient " + patientUID + " has been deleted.");
-		sc.close();
-		ReturnMainMenu();
+		scan.close();
+		//ReturnMainMenu();
 	}
 
 	private void ReturnMainMenu() {
