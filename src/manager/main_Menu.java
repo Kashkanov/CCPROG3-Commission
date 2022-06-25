@@ -96,6 +96,8 @@ public class main_Menu {
 				case 3:
 					System.out.println("Manage Laboratory Results");
 					break;
+				case 4:
+					System.exit(0);
 				default:
 					System.out.println("\nInvalid input\n");
 					break;
