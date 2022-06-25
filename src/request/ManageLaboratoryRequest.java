@@ -122,7 +122,7 @@ public class ManageLaboratoryRequest {
           String reqDate = lddtf.format(ld);
           DateTimeFormatter ltdtf = DateTimeFormatter.ofPattern("hhmm");
           String reqTime = ltdtf.format(lt);
-          String fullString = "" + newUID + ";" + patientUID + ";" + reqDate + ";" + reqTime + ";";
+          String fullString = "" + newUID + ";" + patientUID + ";" + reqDate + ";" + reqTime;
           String result = "";
 
           add.SaveRecord(new LabRequest(fullString, newUID, patientUID, reqDate, reqTime, result), servCode);

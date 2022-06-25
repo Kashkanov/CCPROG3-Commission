@@ -42,6 +42,6 @@ public class LabRequest {
     }
 
     public void isolateD() {
-        this.UIDD = this.reqUID.substring(11, 113);
+        this.UIDD = this.reqUID.substring(11, 13);
     }
 }
