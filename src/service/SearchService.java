@@ -38,7 +38,7 @@ public class SearchService {
 				case 1:
 					ManageServices mng = new ManageServices();
 					System.out.println("Back to Search Service");
-					mng.ProcessService(services, 4);
+					mng.EditService(services);
 					break;
 				case 2:
 					ReturnMainMenu();

@@ -38,7 +38,7 @@ public class EditService {
 				case 1:
 					ManageServices mng = new ManageServices();
 					System.out.println("Back to Search Service");
-					mng.ProcessService(services, 4);
+					mng.EditService(services);
 					break;
 				case 2:
 					ReturnMainMenu();
@@ -64,7 +64,7 @@ public class EditService {
 					d.DeleteService(services.get(i).getServCode(), services, true);
 				}
 			}
-		} else {
+		} else if (matchesInd.size() == 1) {
 			d.DeleteService(services.get(matchesInd.get(0)).getServCode(), services, true);
 		}
 
