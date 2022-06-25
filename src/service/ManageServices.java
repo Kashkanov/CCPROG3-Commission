@@ -31,8 +31,8 @@ public class ManageServices {
 		System.out.println("Service Code: ");
 		servCode = sc.nextLine();
 		while (add.isServCodeUnique(services, servCode) == false && f1.exists()) {
-			System.out.println("National ID Already Exists! Enter a new one");
-			System.out.println("National ID no.: ");
+			System.out.println("Service code already exists or has been previously deleted! Enter a new one.");
+			System.out.println("Service code: ");
 			servCode = sc.nextLine();
 		}
 
