@@ -86,7 +86,7 @@ public class EditService {
 			for (int i = 0; i < services.size(); i++) {
 				// System.out.println(key + "==" + services.get(i).getDescription() + "//" +
 				// key.contains(services.get(i).getDescription()));//<===
-				if (services.get(i).getDescription().contains(key) && services.get(i).deleted == 'D') {
+				if (services.get(i).getDescription().contains(key) && services.get(i).deleted != 'D') {
 					matchesInd.add(i);
 				}
 			}
