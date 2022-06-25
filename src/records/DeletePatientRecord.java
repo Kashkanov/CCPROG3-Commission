@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
+
 //TODO: search again should return to search function
 
 public class DeletePatientRecord {
@@ -51,7 +53,7 @@ public class DeletePatientRecord {
 				case 1:
 					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Delete Patient Record");
-					mng.ProcessPatientRecord(patients, 4);
+					mng.ProcessPatientRecord(patients, 3);
 					break;
 				case 2:
 					scan.close();
@@ -151,7 +153,7 @@ public class DeletePatientRecord {
 		main_Menu.main(null);
 	}
 
-	public void SearchPatientRecord(int transaction, String search, ArrayList<Patient> patients) {
+	public void SearchRecord(int transaction, String search, ArrayList<Patient> patients) {
 
 		String bday = ""; // need to separate bday from lastname since fullString places middlename
 							// between them
@@ -166,13 +168,23 @@ public class DeletePatientRecord {
 		for (int i = 0; i < patients.size(); i++) {
 			String fullString = patients.get(i).getFullString();
 			if (transaction == 2) {
-				if (fullString.contains(search) && fullString.contains(bday))
-					matches.add(fullString);
+				if (fullString.contains(search) && fullString.contains(bday)){
+					String[] splitFS = fullString.split(";");
+					if(splitFS.length <= 9)
+						matches.add(fullString);
+				}
 			} else {
-				if (fullString.contains(search))
-					matches.add(fullString);
+				if (fullString.contains(search)){
+					String[] splitFS = fullString.split(";");
+					if(splitFS.length <= 9)
+						matches.add(fullString);
+				
+				}
 			}
 		}
+		
+
+		
 
 		DisplayPatientRecord(search, matches, patients);
 	}

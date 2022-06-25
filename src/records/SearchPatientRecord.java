@@ -146,11 +146,18 @@ public class SearchPatientRecord {
 		for (int i = 0; i < patients.size(); i++) {
 			String fullString = patients.get(i).getFullString();
 			if (transaction == 2) {
-				if (fullString.contains(search) && fullString.contains(bday))
-					matches.add(fullString);
+				if (fullString.contains(search) && fullString.contains(bday)){
+					String[] splitFS = fullString.split(";");
+					if(splitFS.length <= 9)
+						matches.add(fullString);
+				}
 			} else {
-				if (fullString.contains(search))
-					matches.add(fullString);
+				if (fullString.contains(search)){
+					String[] splitFS = fullString.split(";");
+					if(splitFS.length <= 9)
+						matches.add(fullString);
+				
+				}
 			}
 		}
 

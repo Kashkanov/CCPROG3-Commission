@@ -3,3 +3,5 @@ CAT;Covid-19 Antigen Test;1000;
 CBT;Covid-19 Antibody Test;500;
 SSR;Head Removal Surgery;123;D;gagi joke lang hahaha;
 JBL;Testing kapag eluts;200;D;haha idk;D;test;D;test;D;test;D;testing;
+RFP;Sex Change;6969;D;wla lng;
+FSB;pugot ulo;123;

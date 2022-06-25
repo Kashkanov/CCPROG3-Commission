@@ -315,7 +315,7 @@ public class ManagePatientRecords {
 							edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), UI, patients);
 							break;
 						case 4: // search
 							search.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
@@ -340,7 +340,7 @@ public class ManagePatientRecords {
 							edit.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), combine, patients);
 							break;
 						case 4: // search
 							search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
@@ -358,7 +358,7 @@ public class ManagePatientRecords {
 							edit.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchPatientRecord(Integer.parseInt(transaction), NID, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), NID, patients);
 						case 4: // search
 							search.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
 							break;
