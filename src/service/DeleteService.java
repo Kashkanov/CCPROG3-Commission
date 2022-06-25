@@ -142,7 +142,7 @@ public class DeleteService {
 		/* if input is service code, compare to all service codes */
 		if (transaction == 1) {
 			for (int i = 0; i < services.size(); i++) {
-				if (key.equals(services.get(i).getServCode())) {
+				if (key.equals(services.get(i).getServCode()) && services.get(i).deleted != 'D') {
 					matchesInd.add(i);
 				}
 			}
@@ -150,7 +150,7 @@ public class DeleteService {
 			for (int i = 0; i < services.size(); i++) {
 				// System.out.println(key + "==" + services.get(i).getDescription() + "//" +
 				// key.contains(services.get(i).getDescription()));//<===
-				if (services.get(i).getDescription().contains(key)) {
+				if (services.get(i).getDescription().contains(key) && services.get(i).deleted != 'D') {
 					matchesInd.add(i);
 				}
 			}
