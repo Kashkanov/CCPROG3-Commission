@@ -20,8 +20,6 @@ public class ManageServices {
 	private DeleteService delete = new DeleteService();
 	private EditService edit = new EditService();
 
-	private manager.main_Menu menu = new manager.main_Menu();
-
 	// Constructor
 	public void AddNewService(ArrayList<Service> services) {
 		File f1 = new File("services.txt");
@@ -67,15 +65,11 @@ public class ManageServices {
 
 	// Methods
 	public void ProcessService(ArrayList<Service> services, int choice) {
-		String input;
-
 		/*
 		 * System.out.println("Input Unique Identifier: ");
 		 * input = sc.nextLine();
 		 * delete.DeleteRecord();
 		 */
-		String servCode;
-		String keyWord;
 		String UI;
 
 		System.out.println("Search Patient Record");
