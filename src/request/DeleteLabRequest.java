@@ -36,8 +36,15 @@ public class DeleteLabRequest {
 						servIndex = j;
 					}
 				}
-				System.out.println(
-						res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t" + "");
+				if (res.length <= 4) { // no result
+					System.out.println(
+							res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t"
+									+ "N/A");
+				} else { // with result
+					System.out.println(
+							res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t"
+									+ res[4]);
+				}
 			}
 		} else/* if (matches.isEmpty()) */ {
 			System.out.println("No Record found.");
@@ -107,21 +114,9 @@ public class DeleteLabRequest {
 		for (int i = 0; i < reqs.size(); i++) {
 			// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
 			// patientUID.equals(patients.get(i).getUID()));
-			System.out.println("before: " + reqs.get(i).getFullString());
-		}
-
-		for (int i = 0; i < reqs.size(); i++) {
-			// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
-			// patientUID.equals(patients.get(i).getUID()));
 			if (rUID.equals(reqs.get(i).getRUID())) {
 				reqs.get(i).deleteRequest(reason);
 			}
-		}
-
-		for (int i = 0; i < reqs.size(); i++) {
-			// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
-			// patientUID.equals(patients.get(i).getUID()));
-			System.out.println(reqs.get(i).getFullString());
 		}
 
 		FileWriter fw = null;
