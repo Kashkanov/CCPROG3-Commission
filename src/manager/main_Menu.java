@@ -1,6 +1,7 @@
 package manager;
 
 import records.Patient;
+import request.LabRequest;
 import service.Service;
 
 import java.io.*;
@@ -21,6 +22,7 @@ public class main_Menu {
 		File f2 = new File("Services.txt");
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		ArrayList<Service> services = new ArrayList<Service>();
+		ArrayList<LabRequest> requests = new ArrayList<LabRequest>();
 
 		main_Menu menu = new main_Menu();
 
