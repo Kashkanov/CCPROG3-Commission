@@ -99,6 +99,15 @@ public class ManageLaboratoryRequest {
           requests.add(new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3],
               splitString[4]));
         } // TODO: consider deleted options in read
+        else if (splitString.length == 6) {
+          requests.add(
+              new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], splitString[4],
+                  splitString[5]));
+        } else {
+          requests.add(
+              new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], splitString[4],
+                  splitString[6]));
+        }
       }
 
       return requests;
@@ -211,6 +220,7 @@ public class ManageLaboratoryRequest {
               break;
             case 3: // delete
               // delete.SearchRecord(Integer.parseInt(transaction), UI, patients);
+              delete.search(Integer.parseInt(transaction), rUID, services);
               break;
             case 4: // search
               search.search(Integer.parseInt(transaction), rUID, services);
@@ -228,6 +238,7 @@ public class ManageLaboratoryRequest {
               break;
             case 3: // delete
               // delete.SearchRecord(Integer.parseInt(transaction), combine, patients);
+              delete.search(Integer.parseInt(transaction), pUID, services);
               break;
             case 4: // search
               // search.SearchRecord(Integer.parseInt(transaction), combine, this.list,
@@ -242,7 +253,7 @@ public class ManageLaboratoryRequest {
           break;
       }
 
-      System.out.print("Would you like to delete another user?[Y/N] ");
+      System.out.print("Would you like to delete another request? [Y/N] ");
       delAnother = sc.nextLine();
 
     } while (delAnother.equals("Y") || delAnother.equals("y"));
