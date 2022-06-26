@@ -110,6 +110,7 @@ public class ManageLaboratoryRequest {
 
   public void AddNewLabRequest(ArrayList<Patient> patients, ArrayList<Service> services) {
     String addAnother = "N", lastD = "";
+    LocalDate lastDate = LocalDate.parse("2000-01-01");
     ArrayList<LabRequest> requests = new ArrayList<LabRequest>();
     int lastE = 0;
 
@@ -133,6 +134,10 @@ public class ManageLaboratoryRequest {
 
       requests = readRequests(requests, servCode);
       if (requests.size() > 0) {
+        String lastReqDate = requests.get(requests.size() - 1).getReqDate();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        lastDate = LocalDate.parse(lastReqDate, dtf);
         lastD = requests.get(requests.size() - 1).getD();
         lastE = requests.get(requests.size() - 1).getE();
       } else {
@@ -147,7 +152,7 @@ public class ManageLaboratoryRequest {
       do {
         if (transaction.equals("Y") || transaction.equals("y")) {
           // Save Patient Record
-          String newUID = add.GetUniqueIdentifier(NewRequestCount, servCode, lastD, lastE);
+          String newUID = add.GetUniqueIdentifier(NewRequestCount, servCode, lastDate, lastD, lastE);
           System.out.println("new UID is " + newUID);
           LocalDateTime ldt = LocalDateTime.now();
           LocalDate ld = ldt.toLocalDate();
