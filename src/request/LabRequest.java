@@ -38,7 +38,7 @@ public class LabRequest {
     }
 
     public void isolateE() {
-        this.UIDE = Integer.parseInt(this.reqUID.substring(14));
+        this.UIDE = Integer.parseInt(this.reqUID.substring(13));
     }
 
     public void isolateD() {
