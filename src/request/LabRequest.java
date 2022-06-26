@@ -33,6 +33,14 @@ public class LabRequest {
         return this.UIDE;
     }
 
+    public String getRUID() {
+        return reqUID;
+    }
+
+    public String getPUID() {
+        return patientUID;
+    }
+
     public String getD() {
         return this.UIDD;
     }

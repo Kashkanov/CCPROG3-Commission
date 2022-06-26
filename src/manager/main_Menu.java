@@ -105,7 +105,7 @@ public class main_Menu {
 							request.AddNewLabRequest(patients, services);
 							break;
 						case "2":
-
+							request.ProcessLabRequest(requests, services, 4);
 							break;
 						case "3":
 							// Delete

@@ -65,6 +65,9 @@ public class ManageLaboratoryRequest {
   private String transaction;
   private Scanner sc = new Scanner(System.in);
   private NewLabRequest add = new NewLabRequest();
+  private SearchLabRequest search = new SearchLabRequest();
+  private DeleteLabRequest delete = new DeleteLabRequest();
+  private EditLabRequest edit = new EditLabRequest();
   int NewRequestCount = 0;
 
   public Boolean isValidPatientUID(String uid, ArrayList<Patient> patients) {
@@ -171,6 +174,73 @@ public class ManageLaboratoryRequest {
 
     } while (addAnother.equals("Y") || addAnother.equals("y"));
 
+    main_Menu.main(null);
+  }
+
+  public void ProcessLabRequest(ArrayList<LabRequest> requests, ArrayList<Service> services, int choice) {
+    String delAnother = "Y";
+    String rUID, pUID;
+
+    /*
+     * System.out.println("Input Unique Identifier: ");
+     * input = sc.nextLine();
+     * delete.DeleteRecord();
+     */
+
+    System.out.println("Search Lab Request");
+    System.out.println("");
+
+    System.out.println("Select Prefered Input:");
+    System.out.println("[1] Request UID");
+    System.out.println("[2] Patient UID");
+    System.out.println("[X] Return");
+    String transaction = sc.nextLine();
+    do {
+      switch (transaction) {
+        case "1":
+          System.out.println("Input Request UID: ");
+          rUID = sc.nextLine();
+          switch (choice) {
+            case 2: // edit
+              // edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+              break;
+            case 3: // delete
+              // delete.SearchRecord(Integer.parseInt(transaction), UI, patients);
+              break;
+            case 4: // search
+              search.search(Integer.parseInt(transaction), rUID, services);
+              break;
+
+          }
+          break;
+        case "2":
+          System.out.println("Input Patient UID: ");
+          pUID = sc.nextLine();
+          switch (choice) {
+            case 2: // edit
+              // edit.SearchRecord(Integer.parseInt(transaction), combine, this.list,
+              // patients);
+              break;
+            case 3: // delete
+              // delete.SearchRecord(Integer.parseInt(transaction), combine, patients);
+              break;
+            case 4: // search
+              // search.SearchRecord(Integer.parseInt(transaction), combine, this.list,
+              // patients);
+              search.search(Integer.parseInt(transaction), pUID, services);
+              break;
+
+          }
+          break;
+        case "X":
+          main_Menu.main(null);
+          break;
+      }
+
+      System.out.print("Would you like to delete another user?[Y/N] ");
+      delAnother = sc.nextLine();
+
+    } while (delAnother.equals("Y") || delAnother.equals("y"));
     main_Menu.main(null);
   }
 
