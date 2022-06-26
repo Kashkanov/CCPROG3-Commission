@@ -3,6 +3,7 @@ package request;
 import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.io.*;
 
 import records.Patient;
 import service.Service;
@@ -82,13 +83,34 @@ public class ManageLaboratoryRequest {
     return false;
   }
 
+  public ArrayList<LabRequest> readRequests(ArrayList<LabRequest> requests, String servCode) {
+    String filepath = servCode + "_Requests.txt";
+    try {
+      Scanner scan = new Scanner(new File(filepath));
+      while (scan.hasNext()) {
+        String fullString = scan.nextLine();
+        String[] splitString = fullString.split(";");
+        if (splitString.length <= 4) {
+          requests.add(new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], ""));
+        } else if (splitString.length == 5) {
+          requests.add(new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3],
+              splitString[4]));
+        } // TODO: consider deleted options in read
+      }
+
+      return requests;
+    } catch (FileNotFoundException e) {
+    }
+
+    return requests;
+  }
+
   public void AddNewLabRequest(ArrayList<Patient> patients, ArrayList<Service> services) {
-    String addAnother = "N";
+    String addAnother = "N", lastD = "";
+    ArrayList<LabRequest> requests = new ArrayList<LabRequest>();
+    int lastE = 0;
 
     do {
-      String lastD = patients.get(patients.size() - 1).getD();
-      int lastE = patients.get(patients.size() - 1).getE();
-
       System.out.println("Add New Lab Request\n");
       do {
         System.out.println("Enter patient's UID: ");
@@ -105,6 +127,15 @@ public class ManageLaboratoryRequest {
           System.out.println("Service code is invalid. Try again.");
         }
       } while (!isValidServCode(servCode, services));
+
+      requests = readRequests(requests, servCode);
+      if (requests.size() > 0) {
+        lastD = requests.get(requests.size() - 1).getD();
+        lastE = requests.get(requests.size() - 1).getE();
+      } else {
+        lastD = "AA";
+        lastE = -1;
+      }
 
       System.out.println("Save Lab Request Record [Y/N]? ");
       transaction = sc.nextLine();
