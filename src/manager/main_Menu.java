@@ -109,6 +109,7 @@ public class main_Menu {
 							break;
 						case "3":
 							// Delete
+							request.ProcessLabRequest(requests, services, 3);
 							break;
 						case "4":
 							// Edit
