@@ -3,6 +3,7 @@ package request;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.*;
+import java.time.*;
 
 public class NewLabRequest {
     /*
@@ -122,7 +123,7 @@ public class NewLabRequest {
         }
     }
 
-    public String GetUniqueIdentifier(int NewPatientCount, String servCode, String lastD, int lastE) {
+    public String GetUniqueIdentifier(int NewPatientCount, String servCode, LocalDate lastDate, String lastD, int lastE) {
         // int newPatientCount = 101; //For TEST
         String AAA;
         String BBBB; // year
@@ -134,6 +135,8 @@ public class NewLabRequest {
         DateTimeFormatter yeardtf = DateTimeFormatter.ofPattern("yyyy");
         DateTimeFormatter monthdtf = DateTimeFormatter.ofPattern("MMdd");
         LocalDateTime now = LocalDateTime.now();
+        LocalDate today = LocalDate.now();
+        //LocalDate today = LocalDate.parse("2022-06-27");    //<=== for testing only
 
         // Check if UniqueIdentifier is in the text file or used
         /*
@@ -177,16 +180,23 @@ public class NewLabRequest {
 
         char d1 = lastD.charAt(0);
         char d2 = lastD.charAt(1);
+        
+        if(today.isEqual(lastDate)){
+            if (lastE == 99) {
+                d2++;
+                if (d2 >= 'Z') {
+                    d1++;
+                }
 
-        if (lastE == 99) {
-            d2++;
-            if (d2 >= 'Z') {
-                d1++;
+                EE = "00";
+            } else {
+                EE = String.format("%02d", lastE + 1);
             }
-
+        }
+        else{
+            d1 = 'A';
+            d2 = 'A';
             EE = "00";
-        } else {
-            EE = String.format("%02d", lastE + 1);
         }
 
         DD = "" + d1 + d2;

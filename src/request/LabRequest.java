@@ -29,6 +29,10 @@ public class LabRequest {
         return this.fullString;
     }
 
+    public String getReqDate(){
+        return this.reqDate;
+    }
+
     public int getE() {
         return this.UIDE;
     }
