@@ -184,7 +184,7 @@ public class NewLabRequest {
                 d1++;
             }
 
-            EE = "01";
+            EE = "00";
         } else {
             EE = String.format("%02d", lastE + 1);
         }
