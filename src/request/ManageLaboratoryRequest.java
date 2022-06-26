@@ -217,6 +217,7 @@ public class ManageLaboratoryRequest {
           switch (choice) {
             case 2: // edit
               // edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+              edit.search(Integer.parseInt(transaction), rUID, services);
               break;
             case 3: // delete
               // delete.SearchRecord(Integer.parseInt(transaction), UI, patients);
@@ -234,6 +235,7 @@ public class ManageLaboratoryRequest {
           switch (choice) {
             case 2: // edit
               // edit.SearchRecord(Integer.parseInt(transaction), combine, this.list,
+              edit.search(Integer.parseInt(transaction), pUID, services);
               // patients);
               break;
             case 3: // delete
