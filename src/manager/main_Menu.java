@@ -113,6 +113,7 @@ public class main_Menu {
 							break;
 						case "4":
 							// Edit
+							request.ProcessLabRequest(requests, services, 2);
 							break;
 						case "X":
 							main_Menu.main(null);

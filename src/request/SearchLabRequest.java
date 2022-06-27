@@ -36,8 +36,16 @@ public class SearchLabRequest {
 						servIndex = j;
 					}
 				}
-				System.out.println(
-						res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t" + "");
+				if (res.length <= 4) {
+					System.out.println(
+							res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t"
+									+ "N/A");
+				} else {
+					System.out.println(
+							res[0] + "\t\t" + services.get(servIndex).getDescription() + "\t\t" + res[2] + "\t\t\t"
+									+ res[4]);
+				}
+
 			}
 		} else/* if (matches.isEmpty()) */ {
 			System.out.println("No Record found.");
