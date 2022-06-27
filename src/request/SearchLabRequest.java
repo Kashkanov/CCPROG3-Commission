@@ -82,7 +82,7 @@ public class SearchLabRequest {
 			for (int i = 0; i < services.size(); i++) {
 				String filepath = services.get(i).getServCode() + "_Requests.txt";
 				if (new File(filepath).exists()) {
-					mng.readRequests(requests, services.get(i).getServCode());
+					requests = mng.readRequests(requests, services.get(i).getServCode());
 				}
 			}
 
