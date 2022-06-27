@@ -15,6 +15,11 @@ public class LabRequest {
     public String delReason;
     public int UIDE;
 
+    /*for initialization only*/
+    public LabRequest(){
+
+    }
+
     public LabRequest(String fullString, String reqUID, String patientUID, String reqDate, String reqTime,
             String result) {
         this.fullString = fullString;
