@@ -278,12 +278,13 @@ public class SearchPatientRecord {
 		PdfPTable table2 = new PdfPTable(columnWidths);
 		PdfPCell pcell8 = new PdfPCell();
 		pcell8.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-		pcell8.addElement(new Phrase("Test"));
+		Font bold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+		pcell8.addElement(new Phrase("Test", bold));
 		table.addCell(pcell8);
 
 		PdfPCell pcell9 = new PdfPCell();
 		pcell9.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-		pcell9.addElement(new Phrase("Result"));
+		pcell9.addElement(new Phrase("Result", bold));
 		table.addCell(pcell9);
 
 		PdfPCell pcell10 = new PdfPCell();
