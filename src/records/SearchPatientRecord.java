@@ -78,7 +78,10 @@ public class SearchPatientRecord {
 				// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
 				// patientUID.equals(patients.get(i).getUID()));
 				if (patientUID.equals(patients.get(i).getUID())) {
-					requests = readRequests(requests, patients.get(i).getUID());
+					
+					for(int j=0; j < services.size();j++){
+						requests = readRequests(requests, services.get(j).getServCode());
+					}
 
 					System.out.println(patients.get(i).getUID());
 					System.out.println(patients.get(i).getlastName() + ", " + patients.get(i).getFirstName() + " "
@@ -92,10 +95,10 @@ public class SearchPatientRecord {
 							System.out.print(requests.get(j).getPUID() + "\t\t");
 							for(int k=0;k<services.size();k++){
 								if (requests.get(j).getRUID().substring(0, 3).equals(services.get(k).getServCode())) {
-									System.out.print(services.get(k).getServCode() + "\t\t");
+									System.out.print(services.get(k).getDescription() + "\t\t");
 								}
 							}
-							System.out.print(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
+							System.out.println(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
 						}
 					}
 
@@ -117,20 +120,22 @@ public class SearchPatientRecord {
 					System.out.println(patients.get(i).getNumber());
 					System.out.println(patients.get(i).getNationalID());
 					System.out.println("\nRequest's UID" + "\t\t" + "Lab Test Type" + "\t\t" + "Request Date" + "\t\t" + "Result");
-
-					requests = readRequests(requests, patients.get(i).getUID());
-					System.out.println("andito tayow " + patients.get(i).getUID());	//<===
+					
+					for(int j=0; j < services.size();j++){
+						requests = readRequests(requests, services.get(j).getServCode());
+					}
+					//System.out.println("andito tayow " + patients.get(i).getUID());	//<===
 
 					for(int j=0; j < requests.size(); j++){
-						System.out.println(patients.get(i).getUID() + " == " + requests.get(j).getPUID());	//<===
+						//System.out.println(patients.get(i).getUID() + " == " + requests.get(j).getPUID());	//<===
 						if(patients.get(i).getUID().equals(requests.get(j).getPUID())){
 							System.out.print(requests.get(j).getPUID() + "\t\t");
 							for(int k=0;k<services.size();k++){
 								if (requests.get(j).getRUID().substring(0, 3).equals(services.get(k).getServCode())) {
-									System.out.print(services.get(k).getServCode() + "\t\t");
+									System.out.print(services.get(k).getDescription() + "\t\t");
 								}
 							}
-							System.out.print(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
+							System.out.println(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
 						}
 					}
 				}
@@ -189,6 +194,7 @@ public class SearchPatientRecord {
 
 	public ArrayList<LabRequest> readRequests(ArrayList<LabRequest> requests, String servCode) {
 		String filepath = servCode + "_Requests.txt";
+	
 		try {
 		  Scanner scan = new Scanner(new File(filepath));
 		  while (scan.hasNext()) {
@@ -209,6 +215,7 @@ public class SearchPatientRecord {
 				  new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], splitString[4],
 					  splitString[6]));
 			}
+			
 		  }
 	
 		  return requests;

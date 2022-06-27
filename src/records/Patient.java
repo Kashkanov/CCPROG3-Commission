@@ -3,6 +3,7 @@ package records;
 public class Patient {
     public String fullString;
     public String UID;
+    public String regDate;
     public String lastName;
     public String firstName;
     public String middleName;
@@ -28,6 +29,7 @@ public class Patient {
             this.address = address;
             this.number = number;
             this.nationalID = nationalID;
+            this.regDate = UID.substring(1, 7);
             isolateE();
             isolateD();
     }
@@ -44,6 +46,7 @@ public class Patient {
             this.address = address;
             this.number = number;
             this.nationalID = nationalID;
+            this.regDate = UID.substring(1, 7);
             this.deleted = 'D';
             this.delReason = reason;
             isolateE();
@@ -88,6 +91,10 @@ public class Patient {
 
     public String getNationalID(){
         return this.nationalID;
+    }
+
+    public String getRegDate(){
+        return this.regDate;
     }
 
     public int getE(){

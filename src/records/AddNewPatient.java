@@ -159,7 +159,7 @@ public class AddNewPatient {
 		// 4lastE = 99; // <=== testing lang
 		
 
-		//if(curMonth.equals(lastMonth)){
+		if(curMonth.equals(lastMonth)){
 			if (lastE == 99) {
 				d3++;
 				if (d3 >= 'Z') {
@@ -172,13 +172,13 @@ public class AddNewPatient {
 			} else {
 				EE = String.format("%02d", lastE + 1);
 			}
-		/* }
+		}
 		else{
 			d1='A';
 			d2='A';
 			d3='A';
 			EE="00";
-		}*/
+		}
 
 		DDD = "" + d1 + d2 + d3;
 

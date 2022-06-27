@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.time.*;
 
 import manager.main_Menu;
@@ -100,8 +101,13 @@ public class ManagePatientRecords {
 		Month lastMonth =  LocalDate.parse("2000-01-01").getMonth();
 
 		do{
+			String lastReqDate = patients.get(patients.size() - 1).getRegDate();
+        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMM");
+			lastMonth = YearMonth.parse(lastReqDate, dtf).getMonth();
+
 			String lastD = patients.get(patients.size() - 1).getD();
 			int lastE = patients.get(patients.size() - 1).getE();
+
 
 			System.out.println("Add New Patient");
 			System.out.println("");
