@@ -52,16 +52,16 @@ public class main_Menu {
 							break;
 						case "2":
 							// Edit
-							record.ProcessPatientRecord(patients, 2);
+							record.ProcessPatientRecord(patients, services, 2);
 							break;
 						case "3":
 							// Delete
-							record.ProcessPatientRecord(patients, 3);
+							record.ProcessPatientRecord(patients, services, 3);
 							break;
 						case "4":
 							// Search
 							// try {
-							record.ProcessPatientRecord(patients, 4);
+							record.ProcessPatientRecord(patients, services,4);
 							// } catch (FileNotFoundException e) {
 							// e.printStackTrace();
 							// }
@@ -236,9 +236,7 @@ public class main_Menu {
 					// System.out.println("reason = ); //<===
 					services.add(
 							new Service(fullString, splitString[0], splitString[1], Integer.parseInt(splitString[2])));
-
 				}
-
 			}
 
 		} catch (Exception e) {

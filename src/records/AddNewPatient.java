@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.*;
 
 public class AddNewPatient {
 	// Properties
@@ -91,7 +92,7 @@ public class AddNewPatient {
 		return true;
 	}
 
-	public String GetUniqueIdentifier(int NewPatientCount, String lastD, int lastE) {
+	public String GetUniqueIdentifier(int NewPatientCount, Month lastMonth, String lastD, int lastE) {
 		// int newPatientCount = 101; //For TEST
 		String A;
 		String BBBB;
@@ -103,6 +104,8 @@ public class AddNewPatient {
 		DateTimeFormatter yeardtf = DateTimeFormatter.ofPattern("yyyy");
 		DateTimeFormatter monthdtf = DateTimeFormatter.ofPattern("MM");
 		LocalDateTime now = LocalDateTime.now();
+		//LocalDateTime now = LocalDateTime.parse("2022-07-30T19:34:50.63");	//<== for testing
+		Month curMonth = now.getMonth();
 
 		// Check if UniqueIdentifier is in the text file or used
 		/*
@@ -142,10 +145,10 @@ public class AddNewPatient {
 		BBBB = yeardtf.format(now);
 		CC = monthdtf.format(now);
 
-		if (!CC.equals(month)) {
+		/*if (!CC.equals(month)) {
 			NewPatientCount = 1;
 			month = CC;
-		}
+		}*/
 
 		DDD = lastD;
 
@@ -154,19 +157,28 @@ public class AddNewPatient {
 		char d3 = lastD.charAt(2);
 
 		// 4lastE = 99; // <=== testing lang
+		
 
-		if (lastE == 99) {
-			d3++;
-			if (d3 >= 'Z') {
-				d2++;
-				if (d2 >= 'Z') {
-					d1++;
+		//if(curMonth.equals(lastMonth)){
+			if (lastE == 99) {
+				d3++;
+				if (d3 >= 'Z') {
+					d2++;
+					if (d2 >= 'Z') {
+						d1++;
+					}
 				}
+				EE = "00";
+			} else {
+				EE = String.format("%02d", lastE + 1);
 			}
-			EE = "01";
-		} else {
-			EE = String.format("%02d", lastE + 1);
-		}
+		/* }
+		else{
+			d1='A';
+			d2='A';
+			d3='A';
+			EE="00";
+		}*/
 
 		DDD = "" + d1 + d2 + d3;
 

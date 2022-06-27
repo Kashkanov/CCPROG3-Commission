@@ -3,6 +3,7 @@ package records;
 import java.util.*;
 
 import manager.main_Menu;
+import service.Service;
 
 import java.io.*;
 
@@ -16,7 +17,7 @@ public class EditPatient {
 	private int transaction;
 
 	// Methods
-	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients) {
+	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients, ArrayList<Service> services) {
 		int resIndex = -1;
 		String patientUID = "";
 
@@ -48,7 +49,7 @@ public class EditPatient {
 				case 1:
 					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Edit Patient Record");
-					mng.ProcessPatientRecord(patients, 4);
+					mng.ProcessPatientRecord(patients, services, 4);
 					break;
 				case 2:
 					ReturnMainMenu();
@@ -165,7 +166,7 @@ public class EditPatient {
 		main_Menu.main(null);
 	}
 
-	public void SearchRecord(int transaction, String search, ArrayList<String> list, ArrayList<Patient> patients) {
+	public void SearchRecord(int transaction, String search, ArrayList<Service> services, ArrayList<String> list, ArrayList<Patient> patients) {
 
 		String bday = ""; // need to separate bday from lastname since fullString places middlename
 							// between them
@@ -192,7 +193,7 @@ public class EditPatient {
 			}
 		}
 
-		DisplayPatientRecord(search, matches, patients);
+		DisplayPatientRecord(search, matches, patients, services);
 	}
 
 }

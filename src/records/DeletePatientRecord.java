@@ -10,10 +10,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+//import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.Scanner;
+import service.Service;
 
-import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
+//import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 //TODO: search again should return to search function
 
@@ -24,7 +26,7 @@ public class DeletePatientRecord {
 	private int transaction;
 
 	// Methods
-	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients) {
+	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients, ArrayList<Service> services) {
 		int resIndex = -1;
 		String patientUID = "";
 
@@ -53,7 +55,7 @@ public class DeletePatientRecord {
 				case 1:
 					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Delete Patient Record");
-					mng.ProcessPatientRecord(patients, 3);
+					mng.ProcessPatientRecord(patients, services, 3);
 					break;
 				case 2:
 					scan.close();
@@ -153,7 +155,7 @@ public class DeletePatientRecord {
 		main_Menu.main(null);
 	}
 
-	public void SearchRecord(int transaction, String search, ArrayList<Patient> patients) {
+	public void SearchRecord(int transaction, String search, ArrayList<Service> services, ArrayList<Patient> patients) {
 
 		String bday = ""; // need to separate bday from lastname since fullString places middlename
 							// between them
@@ -186,7 +188,7 @@ public class DeletePatientRecord {
 
 		
 
-		DisplayPatientRecord(search, matches, patients);
+		DisplayPatientRecord(search, matches, patients, services);
 	}
 
 }

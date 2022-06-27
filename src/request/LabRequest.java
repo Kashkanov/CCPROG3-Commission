@@ -78,6 +78,10 @@ public class LabRequest {
         return this.UIDD;
     }
 
+    public String getResult(){
+        return this.result;
+    }
+
     public void isolateE() {
         this.UIDE = Integer.parseInt(this.reqUID.substring(13));
     }

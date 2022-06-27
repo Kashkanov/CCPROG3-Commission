@@ -3,11 +3,14 @@ package records;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.time.*;
 
 import manager.main_Menu;
+import service.Service;
 
 //TODO: Refuse to save patient
 
@@ -94,7 +97,7 @@ public class ManagePatientRecords {
 	public void AddNewPatient(ArrayList<Patient> patients) {
 		File f1 = new File("patients.txt");
 		String addAnother = "N";
-
+		Month lastMonth =  LocalDate.parse("2000-01-01").getMonth();
 
 		do{
 			String lastD = patients.get(patients.size() - 1).getD();
@@ -139,7 +142,7 @@ public class ManagePatientRecords {
 			do {
 				if (transaction.equals("Y") || transaction.equals("y")) {
 					// Save Patient Record
-					String newUID = add.GetUniqueIdentifier(NewPatientCount, lastD, lastE);
+					String newUID = add.GetUniqueIdentifier(NewPatientCount, lastMonth,lastD, lastE);
 					System.out.println("new UID is " + newUID);
 					String fullString = "" + newUID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday
 							+ ";" + Gender + ";" + Address + ";" + Phone + ";" + NationalID;
@@ -282,7 +285,7 @@ public class ManagePatientRecords {
 	 * }
 	 */
 
-	public void ProcessPatientRecord(ArrayList<Patient> patients, int choice) {
+	public void ProcessPatientRecord(ArrayList<Patient> patients, ArrayList<Service> services, int choice) {
 		String delAnother="Y";
 
 		/*
@@ -312,13 +315,13 @@ public class ManagePatientRecords {
 					UI = sc.nextLine();
 					switch (choice) {
 						case 2: // edit
-							edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+							edit.SearchRecord(Integer.parseInt(transaction), UI, services, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchRecord(Integer.parseInt(transaction), UI, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), UI, services, patients);
 							break;
 						case 4: // search
-							search.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
+							search.SearchRecord(Integer.parseInt(transaction), UI, services, this.list, patients);
 							break;
 
 					}
@@ -337,13 +340,13 @@ public class ManagePatientRecords {
 					String combine = LN + ";" + FN + ";" + BD + ";";
 					switch (choice) {
 						case 2: // edit
-							edit.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+							edit.SearchRecord(Integer.parseInt(transaction), combine, services, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchRecord(Integer.parseInt(transaction), combine, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), combine, services, patients);
 							break;
 						case 4: // search
-							search.SearchRecord(Integer.parseInt(transaction), combine, this.list, patients);
+							search.SearchRecord(Integer.parseInt(transaction), combine, services, this.list, patients);
 							break;
 
 					}
@@ -355,12 +358,12 @@ public class ManagePatientRecords {
 					NID = sc.nextLine();
 					switch (choice) {
 						case 2: // edit
-							edit.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
+							edit.SearchRecord(Integer.parseInt(transaction), NID, services, this.list, patients);
 							break;
 						case 3: // delete
-							delete.SearchRecord(Integer.parseInt(transaction), NID, patients);
+							delete.SearchRecord(Integer.parseInt(transaction), NID, services,patients);
 						case 4: // search
-							search.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
+							search.SearchRecord(Integer.parseInt(transaction), NID, services, this.list, patients);
 							break;
 
 					}

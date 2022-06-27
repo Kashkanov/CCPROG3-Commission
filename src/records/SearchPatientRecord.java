@@ -3,6 +3,8 @@ package records;
 import java.util.*;
 
 import manager.main_Menu;
+import request.LabRequest;
+import service.Service;
 
 import records.ManagePatientRecords;
 
@@ -14,9 +16,10 @@ public class SearchPatientRecord {
 	main_Menu menu = new main_Menu();
 
 	// Methods
-	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients) {
+	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients, ArrayList<Service> services) {
 		// String filepath = "Patients.txt";
 		// Scanner sc = new Scanner(new File(filepath));
+		ArrayList<LabRequest> requests = new ArrayList<LabRequest>();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Patient's UID" + "\t\t" + "Last Name" + "\t\t" + "First Name" + "\t\t" + "Middle Name"
 				+ "\t\t" + "Birthday" + "\t\t" + "Gender" + "\t\t" + "Address" + "\t\t" + "Phone Number" + "\t\t"
@@ -54,7 +57,7 @@ public class SearchPatientRecord {
 				case 1:
 					ManagePatientRecords mng = new ManagePatientRecords();
 					System.out.println("Back to Search Patient Record");
-					mng.ProcessPatientRecord(patients, 4);
+					mng.ProcessPatientRecord(patients, services, 4);
 					break;
 				case 2:
 					main_Menu.main(null);
@@ -68,25 +71,15 @@ public class SearchPatientRecord {
 			System.out.println("");
 			System.out.println("Enter the patient's UID that you want to display: ");
 			String patientUID = scan.nextLine();
-
-			// System.out.println("Patient's UID" + "\t" + "Last Name" + "\t" + "First Name"
-			// + "\t" + "Middle Name" + "\t" + "Birthday" + "\t" + "Gender" + "\t" +
-			// "Address" + "\t" + "Phone Number" + "\t" + "National ID no.");
-
-			/*
-			 * for ( int i = 0; i < matches.size(); i++){
-			 * if (matches.get(i).contains(patientUID)){
-			 * //System.out.println(matches.get(i));
-			 * String res = matches.get(i);
-			 * System.out.println(res.split(";"));
-			 * }
-			 * }
-			 */
+			
+		
 			System.out.println("");
 			for (int i = 0; i < patients.size(); i++) {
 				// System.out.println(patientUID + " == " + patients.get(i).getUID() + "//" +
 				// patientUID.equals(patients.get(i).getUID()));
 				if (patientUID.equals(patients.get(i).getUID())) {
+					requests = readRequests(requests, patients.get(i).getUID());
+
 					System.out.println(patients.get(i).getUID());
 					System.out.println(patients.get(i).getlastName() + ", " + patients.get(i).getFirstName() + " "
 							+ patients.get(i).getMiddleName());
@@ -94,6 +87,19 @@ public class SearchPatientRecord {
 					System.out.println(patients.get(i).getAddress());
 					System.out.println(patients.get(i).getNumber());
 					System.out.println(patients.get(i).getNationalID());
+					for(int j=0; j < requests.size(); j++){
+						if(patients.get(i).getUID().equals(requests.get(j).getPUID())){
+							System.out.print(requests.get(j).getPUID() + "\t\t");
+							for(int k=0;k<services.size();k++){
+								if (requests.get(j).getRUID().substring(0, 3).equals(services.get(k).getServCode())) {
+									System.out.print(services.get(k).getServCode() + "\t\t");
+								}
+							}
+							System.out.print(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
+						}
+					}
+
+					
 				}
 			}
 		} else {
@@ -110,6 +116,23 @@ public class SearchPatientRecord {
 					System.out.println(patients.get(i).getAddress());
 					System.out.println(patients.get(i).getNumber());
 					System.out.println(patients.get(i).getNationalID());
+					System.out.println("\nRequest's UID" + "\t\t" + "Lab Test Type" + "\t\t" + "Request Date" + "\t\t" + "Result");
+
+					requests = readRequests(requests, patients.get(i).getUID());
+					System.out.println("andito tayow " + patients.get(i).getUID());	//<===
+
+					for(int j=0; j < requests.size(); j++){
+						System.out.println(patients.get(i).getUID() + " == " + requests.get(j).getPUID());	//<===
+						if(patients.get(i).getUID().equals(requests.get(j).getPUID())){
+							System.out.print(requests.get(j).getPUID() + "\t\t");
+							for(int k=0;k<services.size();k++){
+								if (requests.get(j).getRUID().substring(0, 3).equals(services.get(k).getServCode())) {
+									System.out.print(services.get(k).getServCode() + "\t\t");
+								}
+							}
+							System.out.print(requests.get(j).getReqDate() + "\t\t" + requests.get(j).getResult());
+						}
+					}
 				}
 			}
 		}
@@ -119,7 +142,7 @@ public class SearchPatientRecord {
 		main_Menu.main(null);
 	}
 
-	public void SearchRecord(int transaction, String search, ArrayList<String> list, ArrayList<Patient> patients) {
+	public void SearchRecord(int transaction, String search, ArrayList<Service> services, ArrayList<String> list, ArrayList<Patient> patients) {
 		// String filepath = "Patients.txt";
 		// Scanner sc = new Scanner(new File(filepath));
 		// String firstLastName;
@@ -161,6 +184,37 @@ public class SearchPatientRecord {
 			}
 		}
 
-		DisplayPatientRecord(search, matches, patients);
+		DisplayPatientRecord(search, matches, patients, services);
 	}
+
+	public ArrayList<LabRequest> readRequests(ArrayList<LabRequest> requests, String servCode) {
+		String filepath = servCode + "_Requests.txt";
+		try {
+		  Scanner scan = new Scanner(new File(filepath));
+		  while (scan.hasNext()) {
+			String fullString = scan.nextLine();
+			String[] splitString = fullString.split(";");
+			if (splitString.length <= 4) {
+			  requests.add(new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], ""));
+			} else if (splitString.length == 5) {
+			  requests.add(new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3],
+				  splitString[4]));
+			} // TODO: consider deleted options in read
+			else if (splitString.length == 6) {
+			  requests.add(
+				  new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], splitString[4],
+					  splitString[5]));
+			} else {
+			  requests.add(
+				  new LabRequest(fullString, splitString[0], splitString[1], splitString[2], splitString[3], splitString[4],
+					  splitString[6]));
+			}
+		  }
+	
+		  return requests;
+		} catch (FileNotFoundException e) {
+		}
+	
+		return requests;
+	  }
 }
