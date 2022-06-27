@@ -299,13 +299,13 @@ public class SearchPatientRecord {
 		PdfPTable table3 = new PdfPTable(columnWidths);
 		PdfPCell pcell12 = new PdfPCell();
 		pcell12.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-		pcell12.addElement(new Phrase("Name1"));
+		pcell12.addElement(new Phrase("Ferelyn G. Ching"));
 		pcell12.setBorder(Rectangle.NO_BORDER);
 		table3.addCell(pcell12);
 
 		PdfPCell pcell13 = new PdfPCell();
 		pcell13.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-		pcell13.addElement(new Phrase("Name2"));
+		pcell13.addElement(new Phrase("Sandeon Mikhail N. Gavan"));
 		pcell13.setBorder(Rectangle.NO_BORDER);
 		table3.addCell(pcell13);
 
