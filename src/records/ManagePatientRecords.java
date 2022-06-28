@@ -13,7 +13,6 @@ import java.time.*;
 import manager.main_Menu;
 import service.Service;
 
-//TODO: Refuse to save patient
 
 public class ManagePatientRecords {
 
@@ -37,77 +36,24 @@ public class ManagePatientRecords {
 	private Scanner sc = new Scanner(System.in);
 	private ArrayList<String> list = new ArrayList<String>();
 
-	// Method
-	/*
-	 * public void EditPatient(ArrayList<Patient> patients) {
-	 * String UI;
-	 * String LN;
-	 * String FN;
-	 * String BD;
-	 * String NID;
-	 * 
-	 * System.out.println("Search Patient Record");
-	 * System.out.println("");
-	 * 
-	 * System.out.println("Select Preffered Input:");
-	 * System.out.println("[1] Unique Identifier");
-	 * System.out.println("[2] Last Name, First Name & Birthday");
-	 * System.out.println("[3] National ID Number");
-	 * System.out.println("[X] Return");
-	 * String transaction = sc.nextLine();
-	 * 
-	 * switch (transaction) {
-	 * case "1":
-	 * // If Unique Identifier
-	 * System.out.println("Input Unique Identifier: ");
-	 * UI = sc.nextLine();
-	 * edit.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
-	 * 
-	 * break;
-	 * case "2":
-	 * // If Last Name, First Name & Birthday
-	 * System.out.println("Last Name: ");
-	 * LN = sc.nextLine();
-	 * 
-	 * System.out.println("First Name: ");
-	 * FN = sc.nextLine();
-	 * 
-	 * System.out.println("Birthday(YYYYMMDD): ");
-	 * BD = sc.nextLine();
-	 * 
-	 * String combine = FN + ";" + LN + ";" + BD + ";";
-	 * 
-	 * edit.SearchRecord(Integer.parseInt(transaction), combine, this.list,
-	 * patients);
-	 * break;
-	 * case "3":
-	 * // If National ID
-	 * System.out.println("National ID no.: ");
-	 * NID = sc.nextLine();
-	 * edit.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
-	 * break;
-	 * case "X":
-	 * menu.main(null);
-	 * break;
-	 * }
-	 * 
-	 * 
-	 * }
-	 */
 
 	public void AddNewPatient(ArrayList<Patient> patients) {
 		File f1 = new File("patients.txt");
 		String addAnother = "N";
 		Month lastMonth =  LocalDate.parse("2000-01-01").getMonth();
 
+
 		do{
-			String lastReqDate = patients.get(patients.size() - 1).getRegDate();
-        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMM");
-			lastMonth = YearMonth.parse(lastReqDate, dtf).getMonth();
+			String lastD = "AAA";
+			int lastE = 00;
+			if(patients.size()>0) {
+				String lastReqDate = patients.get(patients.size() - 1).getRegDate();
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMM");
+				lastMonth = YearMonth.parse(lastReqDate, dtf).getMonth();
 
-			String lastD = patients.get(patients.size() - 1).getD();
-			int lastE = patients.get(patients.size() - 1).getE();
-
+				lastD = patients.get(patients.size() - 1).getD();
+				lastE = patients.get(patients.size() - 1).getE();
+			}
 
 			System.out.println("Add New Patient");
 			System.out.println("");
@@ -144,23 +90,24 @@ public class ManagePatientRecords {
 			System.out.println("Save Patient Record[Y/N]? ");
 			transaction = sc.nextLine();
 
-			// NewPatientCount++;
+
 			do {
 				if (transaction.equals("Y") || transaction.equals("y")) {
 					// Save Patient Record
-					String newUID = add.GetUniqueIdentifier(NewPatientCount, lastMonth,lastD, lastE);
+
+					String newUID = add.GetUniqueIdentifier(lastMonth, lastD, lastE);
 					System.out.println("new UID is " + newUID);
 					String fullString = "" + newUID + ";" + LastName + ";" + FirstName + ";" + MiddleName + ";" + Birthday
-							+ ";" + Gender + ";" + Address + ";" + Phone + ";" + NationalID;
+								+ ";" + Gender + ";" + Address + ";" + Phone + ";" + NationalID;
 					patients.add(new Patient(fullString, newUID, LastName, FirstName, MiddleName, Long.parseLong(Birthday),
-							Gender.charAt(0), Address, Phone, NationalID));
+								Gender.charAt(0), Address, Phone, NationalID));
 
 					add.SaveRecord(patients.get(patients.size() - 1));
 
-					//main_Menu.main(null);
+
 				} else if (transaction.equals("N") || transaction.equals("n")) {
 					System.out.println("Patient Record was not saved.");
-					//main_Menu.main(null);
+
 				}
 			} while (!(transaction.equals("Y") || transaction.equals("y") || transaction.equals("N")
 					|| transaction.equals("n")));
@@ -173,132 +120,11 @@ public class ManagePatientRecords {
 		main_Menu.main(null);
 	}
 
-	
-
-	/*
-	 * public void SearchPatientRecord(ArrayList<Patient> patients) throws
-	 * FileNotFoundException {
-	 * String UI;
-	 * String LN;
-	 * String FN;
-	 * String BD;
-	 * String NID;
-	 * 
-	 * System.out.println("Search Patient Record");
-	 * System.out.println("");
-	 * 
-	 * System.out.println("Select Preffered Input:");
-	 * System.out.println("[1] Unique Identifier");
-	 * System.out.println("[2] Last Name, First Name & Birthday");
-	 * System.out.println("[3] National ID Number");
-	 * System.out.println("[X] Return");
-	 * String transaction = sc.nextLine();
-	 * 
-	 * switch (transaction) {
-	 * case "1":
-	 * // If Unique Identifier
-	 * System.out.println("Input Unique Identifier: ");
-	 * UI = sc.nextLine();
-	 * search.SearchRecord(Integer.parseInt(transaction), UI, this.list, patients);
-	 * 
-	 * break;
-	 * case "2":
-	 * // If Last Name, First Name & Birthday
-	 * System.out.println("Last Name: ");
-	 * LN = sc.nextLine();
-	 * 
-	 * System.out.println("First Name: ");
-	 * FN = sc.nextLine();
-	 * 
-	 * System.out.println("Birthday(YYYYMMDD): ");
-	 * BD = sc.nextLine();
-	 * 
-	 * String combine = FN + ";" + LN + ";" + BD + ";";
-	 * 
-	 * search.SearchRecord(Integer.parseInt(transaction), combine, this.list,
-	 * patients);
-	 * break;
-	 * case "3":
-	 * // If National ID
-	 * System.out.println("National ID no.: ");
-	 * NID = sc.nextLine();
-	 * search.SearchRecord(Integer.parseInt(transaction), NID, this.list, patients);
-	 * break;
-	 * case "X":
-	 * menu.main(null);
-	 * break;
-	 * }
-	 * 
-	 * }
-	 * 
-	 * public void DeletePatientRecord(ArrayList<Patient> patients) {
-	 * String input;
-	 * 
-	 * /*System.out.println("Input Unique Identifier: ");
-	 * input = sc.nextLine();
-	 * delete.DeleteRecord();
-	 */
-	/*
-	 * String UI;
-	 * String LN;
-	 * String FN;
-	 * String BD;
-	 * String NID;
-	 * 
-	 * System.out.println("Search Patient Record");
-	 * System.out.println("");
-	 * 
-	 * System.out.println("Select Preffered Input:");
-	 * System.out.println("[1] Unique Identifier");
-	 * System.out.println("[2] Last Name, First Name & Birthday");
-	 * System.out.println("[3] National ID Number");
-	 * System.out.println("[X] Return");
-	 * String transaction = sc.nextLine();
-	 * 
-	 * switch (transaction) {
-	 * case "1":
-	 * // If Unique Identifier
-	 * System.out.println("Input Unique Identifier: ");
-	 * UI = sc.nextLine();
-	 * delete.SearchPatientRecord(Integer.parseInt(transaction), UI, patients);
-	 * 
-	 * break;
-	 * case "2":
-	 * // If Last Name, First Name & Birthday
-	 * System.out.println("Last Name: ");
-	 * LN = sc.nextLine();
-	 * 
-	 * System.out.println("First Name: ");
-	 * FN = sc.nextLine();
-	 * 
-	 * System.out.println("Birthday(YYYYMMDD): ");
-	 * BD = sc.nextLine();
-	 * 
-	 * String combine = FN + ";" + LN + ";" + BD + ";";
-	 * delete.SearchPatientRecord(Integer.parseInt(transaction), combine, patients);
-	 * 
-	 * break;
-	 * case "3":
-	 * // If National ID
-	 * System.out.println("National ID no.: ");
-	 * NID = sc.nextLine();
-	 * delete.SearchPatientRecord(Integer.parseInt(transaction), NID, patients);
-	 * break;
-	 * case "X":
-	 * menu.main(null);
-	 * break;
-	 * }
-	 * }
-	 */
 
 	public void ProcessPatientRecord(ArrayList<Patient> patients, ArrayList<Service> services, int choice) {
 		String delAnother="Y";
 
-		/*
-		 * System.out.println("Input Unique Identifier: ");
-		 * input = sc.nextLine();
-		 * delete.DeleteRecord();
-		 */
+
 		String UI;
 		String LN;
 		String FN;
@@ -380,7 +206,6 @@ public class ManagePatientRecords {
 					break;
 			}
 
-			
 			System.out.print("Would you like to delete another user?[Y/N] ");
 			delAnother = sc.nextLine();
 	

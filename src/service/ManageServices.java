@@ -65,11 +65,7 @@ public class ManageServices {
 
 	// Methods
 	public void ProcessService(ArrayList<Service> services, int choice) {
-		/*
-		 * System.out.println("Input Unique Identifier: ");
-		 * input = sc.nextLine();
-		 * delete.DeleteRecord();
-		 */
+
 		String UI;
 
 		System.out.println("Search Patient Record");
@@ -106,12 +102,6 @@ public class ManageServices {
 					case 3: // delete
 						delete.SearchService(Integer.parseInt(transaction), descKey, services);
 						break;
-					/*
-					 * case 4: //search
-					 * search.SearchRecord(Integer.parseInt(transaction), combine, this.list,
-					 * patients);
-					 * break;
-					 */
 
 				}
 				break;

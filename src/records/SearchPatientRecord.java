@@ -11,21 +11,16 @@ import service.Service;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfChunk;
-
-import records.ManagePatientRecords;
 
 import java.io.*;
 
-//TODO: search again should return to search function
 
 public class SearchPatientRecord {
 	main_Menu menu = new main_Menu();
 
-	// Methods
+
 	private void DisplayPatientRecord(String search, ArrayList<String> matches, ArrayList<Patient> patients, ArrayList<Service> services) {
-		// String filepath = "Patients.txt";
-		// Scanner sc = new Scanner(new File(filepath));
+
 		String choice = "";
 		Patient ptn = patients.get(0);
 		Service svc = services.get(0);
@@ -352,21 +347,10 @@ public class SearchPatientRecord {
 	}
 
 	public void SearchRecord(int transaction, String search, ArrayList<Service> services, ArrayList<String> list, ArrayList<Patient> patients) {
-		// String filepath = "Patients.txt";
-		// Scanner sc = new Scanner(new File(filepath));
-		// String firstLastName;
+
 		String bday = ""; // need to separate bday from lastname since fullString places middlename
 							// between them
 		ArrayList<String> matches = new ArrayList<String>();
-
-		/*
-		 * while(sc.hasNext()) {
-		 * String record = sc.nextLine();
-		 * if(record.contains(search)) {
-		 * matches.add(record);
-		 * }
-		 * }
-		 */
 
 		/* if transaction is 2, separate lastname & firstname from bday */
 		if (transaction == 2) {

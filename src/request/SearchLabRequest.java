@@ -15,17 +15,6 @@ public class SearchLabRequest {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("\nRequest UID" + "\t\t" + "Lab Test Type" + "\t\t\t" + "Request Date" + "\t\t" + "Result");
 
-		/*
-		 * while(sc.hasNext()) {
-		 * String record = sc.nextLine();
-		 * if(record.contains(search)) {
-		 * // System.out.println(record);
-		 * String[] res = record.split(";");
-		 * System.out.println(res[0] + "\t" + res[1] + "\t" + res[2] + "\t" + res[3] +
-		 * "\t" + res[4] + "\t" + res[5] + "\t" + res[6] + "\t" + res[7] + "\t" +
-		 * res[8]);
-		 * }
-		 */
 		int servIndex = 0;
 		if (!matches.isEmpty()) {
 			for (int i = 0; i < matches.size(); i++) {

@@ -31,7 +31,7 @@ public class main_Menu {
 		if (f2.exists())
 			menu.readServices(services);
 
-		// menu.printPatients(patients);
+
 		records.ManagePatientRecords record = new records.ManagePatientRecords();
 		service.ManageServices service = new service.ManageServices();
 		request.ManageLaboratoryRequest request = new request.ManageLaboratoryRequest();
@@ -52,19 +52,26 @@ public class main_Menu {
 							break;
 						case "2":
 							// Edit
+							if(patients.isEmpty()){
+								System.out.println("\nThere are no registered patients yet!\n");
+								main_Menu.main(null);
+							}
 							record.ProcessPatientRecord(patients, services, 2);
 							break;
 						case "3":
 							// Delete
+							if(patients.isEmpty()){
+								System.out.println("\nThere are no registered patients yet!\n");
+								main_Menu.main(null);
+							}
 							record.ProcessPatientRecord(patients, services, 3);
 							break;
 						case "4":
-							// Search
-							// try {
+							if(patients.isEmpty()){
+								System.out.println("\nThere are no registered patients yet!\n");
+								main_Menu.main(null);
+							}
 							record.ProcessPatientRecord(patients, services,4);
-							// } catch (FileNotFoundException e) {
-							// e.printStackTrace();
-							// }
 							break;
 						case "X":
 							main_Menu.main(null);
@@ -78,7 +85,6 @@ public class main_Menu {
 						case "1":
 							// Add
 							service.AddNewService(services);
-
 							break;
 						case "2":
 							service.ProcessService(services, 2);
@@ -198,11 +204,8 @@ public class main_Menu {
 					patients.add(new Patient(fullString, splitString[0], splitString[1], splitString[2], splitString[3],
 							Long.parseLong(splitString[4]), splitString[5].charAt(0), splitString[6], splitString[7],
 							splitString[8], splitString[10]));
-
 				}
-
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

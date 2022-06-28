@@ -41,27 +41,7 @@ public class AddNewPatient {
 			pw = new PrintWriter(bw);
 
 			pw.print(patient.getFullString() + ";");
-			/*
-			 * for (int i = 0; i < this.list.size(); i++) {
-			 * removeDuplicate(this.list);
-			 * pw.print(this.list.get(i) + ";");
-			 * k++;
-			 * if (k == 9) {
-			 * pw.println();
-			 * k = 0;
-			 * }
-			 * }
-			 * 
-			 * pw.print(patient.getUID() + ";");
-			 * pw.print(patient.getFirstName() + ";");
-			 * pw.print(patient.getlastName() + ";");
-			 * pw.print(patient.getMiddleName() + ";");
-			 * pw.print(patient.getBirthday() + ";");
-			 * pw.print(patient.getGender() + ";");
-			 * pw.print(patient.getAddress() + ";");
-			 * pw.print(patient.getNumber() + ";");
-			 * pw.print(patient.getNationalID() + ";");
-			 */
+
 			pw.print("\n");
 			pw.flush();
 
@@ -92,7 +72,7 @@ public class AddNewPatient {
 		return true;
 	}
 
-	public String GetUniqueIdentifier(int NewPatientCount, Month lastMonth, String lastD, int lastE) {
+	public String GetUniqueIdentifier( Month lastMonth, String lastD, int lastE) {
 		// int newPatientCount = 101; //For TEST
 		String A;
 		String BBBB;
@@ -107,48 +87,10 @@ public class AddNewPatient {
 		//LocalDateTime now = LocalDateTime.parse("2022-07-30T19:34:50.63");	//<== for testing
 		Month curMonth = now.getMonth();
 
-		// Check if UniqueIdentifier is in the text file or used
-		/*
-		 * String filepath = "Patients.txt";
-		 * String checkUI = "P202206AAA00";
-		 * 
-		 * boolean found = false;
-		 * String OldUI, LastName, FirstName, MiddleName,
-		 * Birthday, Gender, Address, Phone, NI;
-		 * 
-		 * /*try {
-		 * Scanner x = new Scanner(new File(filepath));
-		 * x.useDelimiter(";");
-		 * System.out.println(x);
-		 * 
-		 * while (x.hasNext() && !found) {
-		 * OldUI = x.next();
-		 * LastName = x.next();
-		 * FirstName = x.next();
-		 * MiddleName = x.next();
-		 * Birthday = x.next();
-		 * Gender = x.next();
-		 * Address = x.next();
-		 * Phone = x.next();
-		 * NI = x.next();
-		 * if (OldUI.equals(checkUI)) {
-		 * found = true;
-		 * }
-		 * }
-		 * 
-		 * } catch (Exception e) {
-		 * e.printStackTrace();
-		 * }
-		 */
 
 		A = "P";
 		BBBB = yeardtf.format(now);
 		CC = monthdtf.format(now);
-
-		/*if (!CC.equals(month)) {
-			NewPatientCount = 1;
-			month = CC;
-		}*/
 
 		DDD = lastD;
 
@@ -156,8 +98,7 @@ public class AddNewPatient {
 		char d2 = lastD.charAt(1);
 		char d3 = lastD.charAt(2);
 
-		// 4lastE = 99; // <=== testing lang
-		
+		// 4lastE = 99; // <=== testing lan
 
 		if(curMonth.equals(lastMonth)){
 			if (lastE == 99) {
@@ -182,21 +123,7 @@ public class AddNewPatient {
 
 		DDD = "" + d1 + d2 + d3;
 
-		// if Added New Patient
-		/*
-		 * int i = 0;
-		 * outerloop: for (char c1 = 'A'; c1 <= 'Z'; c1++)
-		 * for (char c2 = 'A'; c2 <= 'Z'; c2++)
-		 * for (char c3 = 'A'; c3 <= 'Z'; c3++)
-		 * for (int j = 0; j <= 99; j++) {
-		 * EE = String.format("%02d", j);
-		 * DDD = "" + c1 + c2 + c3;
-		 * i++;
-		 * 
-		 * if (i == NewPatientCount)
-		 * break outerloop;
-		 * }
-		 */
+
 
 		UniqueIdentifier = A + BBBB + CC + DDD + EE;
 		System.out.println("unique= " + UniqueIdentifier); // <===

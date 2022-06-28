@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import service.Service;
 
-//import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
-
-//TODO: search again should return to search function
 
 public class DeletePatientRecord {
 
@@ -148,7 +145,7 @@ public class DeletePatientRecord {
 		}
 		System.out.println("\nData of patient " + patientUID + " has been deleted.");
 		
-		//ReturnMainMenu();
+
 	}
 
 	private void ReturnMainMenu() {
@@ -184,9 +181,6 @@ public class DeletePatientRecord {
 				}
 			}
 		}
-		
-
-		
 
 		DisplayPatientRecord(search, matches, patients, services);
 	}
