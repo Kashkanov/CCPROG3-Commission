@@ -50,7 +50,7 @@ public class EditService {
 		/* only asks for servCode if results are more than 1 */
 		if (matchesInd.size() > 1) {
 			System.out.println("");
-			System.out.println("Enter the Service Code of the service that you want to delete: ");
+			System.out.println("Enter the Service Code of the service that you want to edit: ");
 			String servCode = scan.nextLine();
 
 			System.out.println("");

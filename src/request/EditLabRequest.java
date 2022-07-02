@@ -62,7 +62,7 @@ public class EditLabRequest {
 
 		if (matches.size() > 1) {
 			System.out.println("");
-			System.out.println("Enter the request UID that you want to delete: ");
+			System.out.println("Enter the request UID that you want to edit: ");
 			rUID = scan.nextLine();
 
 			System.out.println("");
